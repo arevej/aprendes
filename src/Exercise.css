@@ -1,0 +1,40 @@
+.exercise {
+  width: 450px;
+  margin: 0 auto;
+  border: 1px solid #F09872;
+  border-radius: 30px;
+  padding: 20px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.option {
+  border: 1px solid #FFE3E3;
+  border-radius: 20px;
+  background: #bf0d0d;
+  font-size: 20px;
+  text-decoration: none;
+  padding: 13px 70px;
+  color: #fff;
+  transition: 0.2s background;
+}
+
+.option:hover {
+  background: #F46060;
+}
+
+.option--disabled, .option--disabled:hover {
+  background-color: pink;
+}
+
+.option--active, .option--active:hover {
+  background-color: green;
+}
+
+.helper {
+  font-size: 12px;
+  text-decoration: none;
+  color: #bf0d0d;
+  margin-top: 30px;
+}
