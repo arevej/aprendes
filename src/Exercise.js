@@ -54,12 +54,19 @@ class Exercise extends Component {
   render() {
     const question = this.getCurrentQuestion();
     const wasPressed = option => this.state.tries.indexOf(option) !== -1;
+    const hasTries = this.state.tries.length > 0;
+    const hasOnlyWrongTries = this.state.tries.indexOf(question.answer) === -1;
     return (
-      <div className="exercise">
+      <div
+        className="exercise"
+        style={{
+          background: this.props.color,
+        }}
+      >
         <div>
           {this.props.formatTaskDescription(
             question,
-            this.state.tries.length > 0,
+            hasTries && hasOnlyWrongTries,
           )}
         </div>
 
@@ -72,9 +79,9 @@ class Exercise extends Component {
             {option}
           </Option>
         ))}
-        <span>
+        <div className="exercise-progress">
           {this.state.currentQuestionIndex + 1} / {this.props.questions.length}
-        </span>
+        </div>
       </div>
     );
   }

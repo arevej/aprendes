@@ -1,5 +1,6 @@
 import React from 'react';
 import Exercise from './Exercise';
+import * as Icons from 'react-icons/lib/ti';
 
 import './ConjugationExercise.css';
 
@@ -10,17 +11,26 @@ function ConjugationExercise({ questions }) {
       question.verb.length - 2,
       question.verb.length,
     );
+
+    const text = new SpeechSynthesisUtterance();
+    text.text = question.verb;
+    text.lang = 'es-ES';
+
     return (
-      <h3 className="conjugation-exercise-title">
-        <span className="conjugation-exercise-question">
+      <div className="conjugation-exercise-title">
+        <div className="conjugation-exercise-question">
           {verbFirstPart}
           <span style={hasError ? { color: 'red' } : null}>{verbEnding}</span>
-        </span>
-        &nbsp;
-        <span className="conjugation-exercise-question-translation">
+          <Icons.TiVolumeUp
+            size={36}
+            className="button-tospeech"
+            onClick={() => window.speechSynthesis.speak(text)}
+          />
+        </div>
+        <div className="conjugation-exercise-question-translation">
           ({question.translation})
-        </span>
-      </h3>
+        </div>
+      </div>
     );
   };
 
@@ -28,6 +38,7 @@ function ConjugationExercise({ questions }) {
     <Exercise
       questions={questions}
       formatTaskDescription={formatTaskDescription}
+      color="rgba(255, 240, 245, 0.3)"
     />
   );
 }

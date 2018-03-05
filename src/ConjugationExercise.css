@@ -1,8 +1,36 @@
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans');
+@import url('https://fonts.googleapis.com/css?family=Chewy');
+
 .conjugation-exercise-title {
-  font-size: 20px;
+  font-family: 'Noto Sans', sans-serif;
+  font-size: 35px;
   font-weight: 400;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-bottom: 32px;
+}
+
+.conjugation-exercise-question {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .conjugation-exercise-question-translation {
-  font-family: cursive;
+  font-size: 18px;
+  color: #aaa;
+}
+
+
+
+
+.button-tospeech {
+  color: #bf0d0d;
+  transition: 0.3s all;
+  margin-left: 5px;
+}
+
+.button-tospeech:hover {
+  color: #F46060;
 }

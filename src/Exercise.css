@@ -1,12 +1,17 @@
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans');
+
 .exercise {
-  width: 450px;
+  font-family: 'Noto Sans', sans-serif;
+  width: 350px;
+  height: 400px;
   margin: 0 auto;
-  border: 1px solid #F09872;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   border-radius: 30px;
-  padding: 20px 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  position: relative;
 }
 
 .option {
@@ -15,9 +20,16 @@
   background: #bf0d0d;
   font-size: 20px;
   text-decoration: none;
-  padding: 13px 70px;
+  padding: 10px 70px;
   color: #fff;
-  transition: 0.2s background;
+  width: 100px;
+  margin-bottom: 10px;
+  text-align: center;
+  transition: 0.2s all;
+}
+
+.option:last-of-type {
+  margin-bottom: 0;
 }
 
 .option:hover {
@@ -32,9 +44,9 @@
   background-color: green;
 }
 
-.helper {
-  font-size: 12px;
-  text-decoration: none;
-  color: #bf0d0d;
-  margin-top: 30px;
+
+.exercise-progress {
+  position: absolute;
+  bottom: 0;
+  margin-bottom: 13px;
 }
