@@ -1,5 +1,4 @@
 @import url('https://fonts.googleapis.com/css?family=Noto+Sans');
-@import url('https://fonts.googleapis.com/css?family=Chewy');
 
 .conjugation-exercise-title {
   font-family: 'Noto Sans', sans-serif;
@@ -20,17 +19,4 @@
 .conjugation-exercise-question-translation {
   font-size: 18px;
   color: #aaa;
-}
-
-
-
-
-.button-tospeech {
-  color: #bf0d0d;
-  transition: 0.3s all;
-  margin-left: 5px;
-}
-
-.button-tospeech:hover {
-  color: #F46060;
 }

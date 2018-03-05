@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import Exercise from './Exercise';
 import ConjugationExercise from './ConjugationExercise';
+import logo from './logo.png';
 
 import './App.css';
-import { Option } from './Exercise';
 
 class App extends Component {
   state = {
@@ -30,23 +29,20 @@ class App extends Component {
     ],
   };
 
-  startExercise = () => this.setState({ stage: 'exercise' });
+  handleStartExercise = name => () => this.setState({ stage: name });
 
   render() {
     return (
       <div>
-        <h1>AprendEs</h1>
+        <img src={logo} height="60px" />
         {this.state.stage === 'intro' ? (
-          <div className="exercise">
-            <h3 className="conjugation-exercise-title">
-              Choose correct group (conjugation):
-            </h3>
-            <Option onClick={this.startExercise}>Start</Option>
-            <a href="#" className="helper">
-              {"Don't know what is all about? Take a refresher."}
-            </a>
+          <div>
+            <div>Welcome</div>
+            <div onClick={this.handleStartExercise('conjugationExercise')}>
+              Start Conjugation Exercise
+            </div>
           </div>
-        ) : this.state.stage === 'exercise' ? (
+        ) : this.state.stage === 'conjugationExercise' ? (
           <ConjugationExercise
             questions={this.state.conjugationExerciseQuestions}
           />

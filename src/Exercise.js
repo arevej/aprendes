@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
+import Button from './Buttons';
 
 import './Exercise.css';
 
-export function Option({ isDisabled, isActive, children, onClick }) {
+export function Option({ isDisabled, isActive, text, onClick }) {
   return (
-    <a
-      href="#"
+    <div
       className={
         'option' +
         (isDisabled ? ' option--disabled' : '') +
@@ -13,13 +13,14 @@ export function Option({ isDisabled, isActive, children, onClick }) {
       }
       onClick={onClick}
     >
-      {children}
-    </a>
+      {text}
+    </div>
   );
 }
 
 class Exercise extends Component {
   state = {
+    isStartedExercise: false,
     currentQuestionIndex: 0,
     tries: [],
   };
@@ -51,12 +52,22 @@ class Exercise extends Component {
     }
   };
 
+  startExercise = () => this.setState({ isStartedExercise: true });
+
   render() {
     const question = this.getCurrentQuestion();
     const wasPressed = option => this.state.tries.indexOf(option) !== -1;
     const hasTries = this.state.tries.length > 0;
     const hasOnlyWrongTries = this.state.tries.indexOf(question.answer) === -1;
-    return (
+    return !this.state.isStartedExercise ? (
+      <div className="exercise-task">
+        <h3 className="exercise-task-text">{this.props.task}</h3>
+        <Button onClick={this.startExercise} title="Start" />
+        <span className="exercise-task-helper">
+          {"Don't know what is all about? Take a refresher."}
+        </span>
+      </div>
+    ) : (
       <div
         className="exercise"
         style={{
@@ -69,15 +80,14 @@ class Exercise extends Component {
             hasTries && hasOnlyWrongTries,
           )}
         </div>
-
-        {question.options.map(option => (
+        {question.options.map((option, index) => (
           <Option
+            key={index}
             onClick={this.chooseOption(option)}
             isActive={question.answer === option && wasPressed(option)}
             isDisabled={question.answer !== option && wasPressed(option)}
-          >
-            {option}
-          </Option>
+            text={option}
+          />
         ))}
         <div className="exercise-progress">
           {this.state.currentQuestionIndex + 1} / {this.props.questions.length}

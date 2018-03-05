@@ -1,7 +1,6 @@
 import React from 'react';
 import Exercise from './Exercise';
-import * as Icons from 'react-icons/lib/ti';
-
+import { ButtonToVoice } from './Buttons';
 import './ConjugationExercise.css';
 
 function ConjugationExercise({ questions }) {
@@ -12,20 +11,12 @@ function ConjugationExercise({ questions }) {
       question.verb.length,
     );
 
-    const text = new SpeechSynthesisUtterance();
-    text.text = question.verb;
-    text.lang = 'es-ES';
-
     return (
       <div className="conjugation-exercise-title">
         <div className="conjugation-exercise-question">
           {verbFirstPart}
           <span style={hasError ? { color: 'red' } : null}>{verbEnding}</span>
-          <Icons.TiVolumeUp
-            size={36}
-            className="button-tospeech"
-            onClick={() => window.speechSynthesis.speak(text)}
-          />
+          <ButtonToVoice text={question.verb} />
         </div>
         <div className="conjugation-exercise-question-translation">
           ({question.translation})
@@ -39,6 +30,7 @@ function ConjugationExercise({ questions }) {
       questions={questions}
       formatTaskDescription={formatTaskDescription}
       color="rgba(255, 240, 245, 0.3)"
+      task="Choose correct group (conjugation):"
     />
   );
 }
