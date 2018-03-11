@@ -41,11 +41,9 @@ function Menu({ sections, onClick }) {
   );
 }
 
-function MainPage({ menuSections, openSection }) {
+function MainPage() {
   return (
     <div className="main">
-      <Logo />
-      <Menu sections={menuSections} onClick={openSection} />
       <Container>
         <div className="main-description">
           <h3>AprendES can help you to:</h3>
@@ -71,7 +69,6 @@ function MainPage({ menuSections, openSection }) {
           </div>
         </div>
       </Container>
-      <Footer />
     </div>
   );
 }
@@ -88,7 +85,7 @@ function Footer() {
 
 class App extends Component {
   state = {
-    stage: 'main',
+    stage: 'Main',
     conjugationExerciseQuestions: [
       {
         verb: 'hablar',
@@ -117,8 +114,14 @@ class App extends Component {
   };
 
   render() {
+    const { stage } = this.state;
     return (
       <React.Fragment>
+        {stage === 'Main' ? <Logo /> : null}
+        <div style={{ marginTop: stage === 'Main' ? -25 : 10 }}>
+          <Menu sections={this.state.menuSections} onClick={this.openSection} />
+        </div>
+
         {(() => {
           switch (this.state.stage) {
             case 'Grammar':
@@ -127,15 +130,11 @@ class App extends Component {
               return <Vocabulary />;
             case 'Pronunciation':
               return <Pronunciation />;
-            default:
-              return (
-                <MainPage
-                  menuSections={this.state.menuSections}
-                  openSection={this.openSection}
-                />
-              );
+            case 'Main':
+              return <MainPage />;
           }
         })()}
+        <Footer />
       </React.Fragment>
     );
   }
