@@ -1,0 +1,27 @@
+.button {
+  border: 1px solid #FFE3E3;
+  border-radius: 20px;
+  background: #F46060;
+  font-size: 20px;
+  text-decoration: none;
+  padding: 10px 70px;
+  color: #fff;
+  text-align: center;
+  transition: 0.2s all;
+  cursor: pointer;
+}
+
+.button:hover {
+  background: #bf0d0d;
+}
+
+.button-to-voice {
+  color: #bf0d0d;
+  transition: 0.3s all;
+  margin-left: 5px;
+  cursor: pointer;
+}
+
+.button-to-voice:hover {
+  color: #F46060;
+}
