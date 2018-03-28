@@ -3,11 +3,11 @@ import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
 
 import Grammar from './Grammar';
 import Vocabulary from './Vocabulary';
-import Pronunciation from './Pronunciation';
+import Listening from './Listening';
 
 import logo from './img/logo.png';
 import cover from './img/cover.png';
-import pron from './img/pron.png';
+import list from './img/list.png';
 import gram from './img/gram.png';
 import voc from './img/voc.png';
 
@@ -62,10 +62,9 @@ function MainPage() {
             </span>
           </div>
           <div className="main-description-section">
-            <img src={pron} className="main-description-section-icon" />
+            <img src={list} className="main-description-section-icon" />
             <span className="main-description-section-text">
-              Get rid of the accent, making your <strong>pronunciation</strong>{' '}
-              more Spanish.
+              Make your listening of Spanish more easier.
             </span>
           </div>
         </div>
