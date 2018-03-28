@@ -1,6 +1,6 @@
 import React from 'react';
-import Exercise from './Exercise';
-import { ButtonToVoice } from './Buttons';
+import Exercise from '../Exercise';
+import { ButtonToVoice } from '../Buttons';
 import './ConjugationExercise.css';
 
 function ConjugationExercise({ questions }) {

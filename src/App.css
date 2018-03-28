@@ -6,6 +6,10 @@ body {
   letter-spacing: 0.8px;
 }
 
+a {
+  text-decoration: none;
+}
+
 .container {
   margin: 0 auto;
   width: 1024px;

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
 
 import Grammar from './Grammar';
 import Vocabulary from './Vocabulary';
@@ -29,13 +30,13 @@ function Logo({}) {
   );
 }
 
-function Menu({ sections, onClick }) {
+function Menu({ sections }) {
   return (
     <div className="menu">
       {sections.map(section => (
-        <div className="section" onClick={onClick(section)}>
-          {section}
-        </div>
+        <Link to={section.url} className="section">
+          {section.name}
+        </Link>
       ))}
     </div>
   );
@@ -85,7 +86,6 @@ function Footer() {
 
 class App extends Component {
   state = {
-    stage: 'Main',
     conjugationExerciseQuestions: [
       {
         verb: 'hablar',
@@ -106,36 +106,43 @@ class App extends Component {
         answer: '3rd',
       },
     ],
-    menuSections: ['Grammar', 'Vocabulary', 'Pronunciation'],
-  };
-
-  openSection = section => () => {
-    this.setState({ stage: section });
   };
 
   render() {
-    const { stage } = this.state;
     return (
-      <React.Fragment>
-        {stage === 'Main' ? <Logo /> : null}
-        <div style={{ marginTop: stage === 'Main' ? -25 : 10 }}>
-          <Menu sections={this.state.menuSections} onClick={this.openSection} />
-        </div>
+      <Router>
+        <React.Fragment>
+          <Route
+            path="/*"
+            component={({ match }) => (
+              <React.Fragment>
+                {match.url === '/' ? <Logo /> : null}
+                <div style={{ marginTop: match.url === '/' ? -25 : 10 }}>
+                  <Menu
+                    sections={[
+                      { name: 'Grammar', url: '/grammar' },
+                      { name: 'Vocabulary', url: '/vocabulary' },
+                      { name: 'Listening', url: '/listening' },
+                    ]}
+                  />
+                </div>
+              </React.Fragment>
+            )}
+          />
 
-        {(() => {
-          switch (this.state.stage) {
-            case 'Grammar':
-              return <Grammar />;
-            case 'Vocabulary':
-              return <Vocabulary />;
-            case 'Pronunciation':
-              return <Pronunciation />;
-            case 'Main':
-              return <MainPage />;
-          }
-        })()}
-        <Footer />
-      </React.Fragment>
+          <Switch>
+            <Route path="/" exact component={MainPage} />
+
+            <Switch>
+              <Route path="/grammar" exact component={Grammar} />
+              <Route path="/vocabulary" exact component={Vocabulary} />
+              <Route path="/listening" exact component={Listening} />
+            </Switch>
+          </Switch>
+
+          <Footer />
+        </React.Fragment>
+      </Router>
     );
   }
 }
