@@ -64,7 +64,7 @@ function MainPage() {
           <div className="main-description-section">
             <img src={list} className="main-description-section-icon" />
             <span className="main-description-section-text">
-              Make your listening of Spanish more easier.
+              Make your <strong>listening</strong> of Spanish more easier.
             </span>
           </div>
         </div>

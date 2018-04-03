@@ -14,7 +14,9 @@ function Button({ title, onClick }) {
 export function ButtonToVoice({ text }) {
   const textToVoice = new SpeechSynthesisUtterance();
   textToVoice.text = text;
-  textToVoice.lang = 'es-ES';
+  textToVoice.lang = 'es-MX';
+  textToVoice.rate = 0.1;
+  textToVoice.pitch = 0.2;
   return (
     <Icons.TiVolumeUp
       size={36}
