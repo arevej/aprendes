@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
 import Grammar from './Grammar';
 import Vocabulary from './Vocabulary';
 import Listening from './Listening';
+import Button from './Buttons';
 
 import logo from './img/logo.png';
 import cover from './img/cover.png';
@@ -45,6 +46,17 @@ function Menu({ sections }) {
 function MainPage() {
   return (
     <div className="main">
+      <Logo />
+      <Link
+        to="/course"
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          marginTop: '-85px',
+        }}
+      >
+        <Button title="Learn Spanish" onclick={() => {}} round />
+      </Link>
       <Container>
         <div className="main-description">
           <h3>AprendES can help you to:</h3>
@@ -111,34 +123,19 @@ class App extends Component {
     return (
       <Router>
         <React.Fragment>
-          <Route
-            path="/*"
-            component={({ match }) => (
-              <React.Fragment>
-                {match.url === '/' ? <Logo /> : null}
-                <div style={{ marginTop: match.url === '/' ? -25 : 10 }}>
-                  <Menu
-                    sections={[
-                      { name: 'Grammar', url: '/grammar' },
-                      { name: 'Vocabulary', url: '/vocabulary' },
-                      { name: 'Listening', url: '/listening' },
-                    ]}
-                  />
-                </div>
-              </React.Fragment>
-            )}
+          <Route path="/" exact component={MainPage} />
+
+          <Route path="/grammar" exact component={Grammar} />
+          <Route path="/vocabulary" exact component={Vocabulary} />
+          <Route path="/listening" exact component={Listening} />
+
+          <Menu
+            sections={[
+              { name: 'Grammar', url: '/grammar' },
+              { name: 'Vocabulary', url: '/vocabulary' },
+              { name: 'Listening', url: '/listening' },
+            ]}
           />
-
-          <Switch>
-            <Route path="/" exact component={MainPage} />
-
-            <Switch>
-              <Route path="/grammar" exact component={Grammar} />
-              <Route path="/vocabulary" exact component={Vocabulary} />
-              <Route path="/listening" exact component={Listening} />
-            </Switch>
-          </Switch>
-
           <Footer />
         </React.Fragment>
       </Router>

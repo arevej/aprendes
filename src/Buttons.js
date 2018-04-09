@@ -3,9 +3,9 @@ import * as Icons from 'react-icons/lib/ti';
 
 import './Buttons.css';
 
-function Button({ title, onClick }) {
+function Button({ title, onClick, round }) {
   return (
-    <div className="button" onClick={onClick}>
+    <div className={round ? 'button--round' : 'button'} onClick={onClick}>
       {title}
     </div>
   );

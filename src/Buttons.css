@@ -25,3 +25,21 @@
 .button-to-voice:hover {
   color: #F46060;
 }
+
+.button--round {
+  background: #280F34;
+  color: #fff;
+  padding: 51px 30px;
+  margin: 0 20px;
+  width: 110px;
+  text-align: center;
+  border-radius: 100px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  transition: 0.3 all;
+  cursor: pointer;
+  font-size: 25px;
+}
+
+.button--round:hover {
+  background: #3a164b;
+}
