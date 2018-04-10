@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
 import Grammar from './Grammar';
 import Vocabulary from './Vocabulary';
 import Listening from './Listening';
+import Course from './Course';
 import Button from './Buttons';
 
 import logo from './img/logo.png';
@@ -128,6 +129,7 @@ class App extends Component {
           <Route path="/grammar" exact component={Grammar} />
           <Route path="/vocabulary" exact component={Vocabulary} />
           <Route path="/listening" exact component={Listening} />
+          <Route path="/course" exact component={Course} />
 
           <Menu
             sections={[

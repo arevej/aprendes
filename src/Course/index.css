@@ -1,0 +1,18 @@
+.course-progress {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.progressbar {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 20%;
+  margin: 50px 0;
+}
+
+.progressbar-circle {
+  width: 100px;
+}
