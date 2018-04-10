@@ -1,12 +1,19 @@
 import React, { Component } from 'react';
 
+import Header from '../Header';
+
 import './index.css';
 
 class Listening extends Component {
   state = {};
 
   render() {
-    return <div>Listening</div>;
+    return (
+      <React.Fragment>
+        <Header />
+        <div>Listening</div>
+      </React.Fragment>
+    );
   }
 }
 

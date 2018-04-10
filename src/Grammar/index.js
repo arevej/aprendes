@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import Header from '../Header';
+
 import ConjugationExercise from './ConjugationExercise';
 
 import './index.css';
@@ -87,7 +89,12 @@ class Grammar extends Component {
   };
 
   render() {
-    return <ConjugationExercise questions={conjugationExerciseQuestions} />;
+    return (
+      <React.Fragment>
+        <Header />
+        <ConjugationExercise questions={conjugationExerciseQuestions} />
+      </React.Fragment>
+    );
   }
 }
 

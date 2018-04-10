@@ -27,7 +27,9 @@ function Logo({}) {
       }}
       className="cover"
     >
-      <img src={logo} height="100px" className="logo" />
+      <Link to="/">
+        <img src={logo} height="100px" className="logo" />
+      </Link>
     </div>
   );
 }
@@ -97,28 +99,7 @@ function Footer() {
 }
 
 class App extends Component {
-  state = {
-    conjugationExerciseQuestions: [
-      {
-        verb: 'hablar',
-        translation: 'to speak',
-        options: ['1st', '2nd', '3rd'],
-        answer: '1st',
-      },
-      {
-        verb: 'comer',
-        translation: 'to eat',
-        options: ['1st', '2nd', '3rd'],
-        answer: '2nd',
-      },
-      {
-        verb: 'vivir',
-        translation: 'to live',
-        options: ['1st', '2nd', '3rd'],
-        answer: '3rd',
-      },
-    ],
-  };
+  state = {};
 
   render() {
     return (
