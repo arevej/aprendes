@@ -2,8 +2,8 @@
 
 body {
   font-family: 'Noto Sans', sans-serif;
-  font-size: 16px;
-  letter-spacing: 0.8px;
+  font-size: 18px;
+  letter-spacing: 1px;
 }
 
 a {
@@ -20,6 +20,7 @@ a {
   height: 600px;
   display: flex;
   justify-content: center;
+  box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.2), 0 8px 22px 0 rgba(0, 0, 0, 0.19);
 }
 
 .logo {

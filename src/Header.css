@@ -1,9 +1,13 @@
 .header {
   background: #94002D;
+  box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.2), 0 8px 22px 0 rgba(0, 0, 0, 0.19);
+  display: flex;
+  justify-content: center;
 }
 
 .header img {
   margin-top: 8px;
   margin-bottom: 5px;
-  margin-left: 50px;
+  box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.2), 0 8px 22px 0 rgba(0, 0, 0, 0.19);
+  border-radius: 15px;
 }
