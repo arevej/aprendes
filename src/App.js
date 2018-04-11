@@ -107,10 +107,10 @@ class App extends Component {
         <React.Fragment>
           <Route path="/" exact component={MainPage} />
 
-          <Route path="/grammar" exact component={Grammar} />
-          <Route path="/vocabulary" exact component={Vocabulary} />
-          <Route path="/listening" exact component={Listening} />
-          <Route path="/course" exact component={Course} />
+          <Route path="/grammar" component={Grammar} />
+          <Route path="/vocabulary" component={Vocabulary} />
+          <Route path="/listening" component={Listening} />
+          <Route path="/course" component={Course} />
 
           <Menu
             sections={[
