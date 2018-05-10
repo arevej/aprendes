@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Route, Link } from 'react-router-dom';
-import cx from 'classnames';
 
 import Header from '../Header';
 import Container from '../Container';
@@ -85,43 +84,12 @@ const conjugationExerciseQuestions = [
   },
 ];
 
-function SectionMenu({ sections, activeSection, onClick }) {
-  return (
-    <div className="section-menu">
-      {sections.map(section => (
-        <Link to="/grammar" key={section}>
-          <div
-            className={cx('section-menu-item', {
-              'section-menu-item--active': activeSection === section,
-            })}
-            onClick={() => onClick(section)}
-          >
-            {section}
-          </div>
-        </Link>
-      ))}
-    </div>
-  );
-}
-
-function TopicList({ topics }) {
-  return (
-    <div className="topic-list">
-      {topics.map(topic => (
-        <Link className="topic-list-item" to={`/grammar/${topic.slug}`}>
-          {topic.name}
-        </Link>
-      ))}
-    </div>
-  );
-}
-
 class Grammar extends Component {
   state = {
     activeSection: 'Tenses',
     sections: [
       {
-        section_name: 'Tenses',
+        section: 'Tenses',
         topics: [
           { name: 'Presente de Indicativo', slug: 'presente_de_ind' },
           {
@@ -141,7 +109,7 @@ class Grammar extends Component {
         ],
       },
       {
-        section_name: 'Article',
+        section: 'Article',
         topics: [
           { name: 'Definite Article', slug: 'definitive_article' },
           {

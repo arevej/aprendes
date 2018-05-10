@@ -1,0 +1,37 @@
+a {
+  color: #111;
+}
+
+.section-menu {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  font-size: 22px;
+}
+
+.section-menu-item {
+  margin: 0 30px;
+}
+
+.section-menu-item--active {
+  margin: 0 30px;
+  border-bottom: 1px solid #111;
+}
+
+.topic-list {
+  display: flex;
+  flex-direction: column;
+  margin-top: 50px;
+}
+
+.topic-list-item {
+  border: 1px solid #111;
+  border-radius: 7px;
+  padding: 18px;
+  margin-bottom: 18px;
+}
+
+.topic-list-item:hover {
+  box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.2), 0 4px 11px 0 rgba(0, 0, 0, 0.19);
+  border-color: #ddd;
+}
