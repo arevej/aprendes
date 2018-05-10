@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import Header from '../Header';
+import Container from '../Container';
 
 import './index.css';
 
@@ -10,8 +11,10 @@ class Vocabulary extends Component {
   render() {
     return (
       <React.Fragment>
-        <Header />
-        <div>Vocabulary</div>
+        <Container>
+          <Header />
+          <div>Vocabulary</div>
+        </Container>
       </React.Fragment>
     );
   }

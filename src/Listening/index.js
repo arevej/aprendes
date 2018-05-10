@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import Header from '../Header';
+import Container from '../Container';
 
 import './index.css';
 
@@ -10,8 +11,10 @@ class Listening extends Component {
   render() {
     return (
       <React.Fragment>
-        <Header />
-        <div>Listening</div>
+        <Container>
+          <Header />
+          <div>Listening</div>
+        </Container>
       </React.Fragment>
     );
   }

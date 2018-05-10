@@ -10,6 +10,12 @@ a {
   text-decoration: none;
 }
 
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
 .container {
   margin: 0 auto;
   width: 1024px;
@@ -37,6 +43,7 @@ a {
   display: flex;
   flex-direction: row;
   justify-content: center;
+  z-index: 2;
 }
 
 .section {
@@ -92,13 +99,14 @@ a {
 }
 
 .footer {
-  background: #94002D;
+  background: rgba(122, 0, 24, 0.9);
   margin-top: -25px;
 }
 
 .footer-text {
   margin: 0;
   color: #fff;
-  padding: 24px 0;
+  padding: 15px 0;
   text-align: right;
+  font-size: 14px;
 }

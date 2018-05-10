@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import Header from '../Header';
+import Container from '../Container';
 
 import CircularProgressbar from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
@@ -35,21 +36,23 @@ class Course extends Component {
   render() {
     return (
       <React.Fragment>
-        <Header />
-        <div className="course-progress">
-          <ProgressBar
-            title="Beginner"
-            progress={this.state.begginerProgress}
-          />
-          <ProgressBar
-            title="Intermediate"
-            progress={this.state.intermediateProgress}
-          />
-          <ProgressBar
-            title="Advanced"
-            progress={this.state.advancedProgress}
-          />
-        </div>
+        <Container>
+          <Header />
+          <div className="course-progress">
+            <ProgressBar
+              title="Beginner"
+              progress={this.state.begginerProgress}
+            />
+            <ProgressBar
+              title="Intermediate"
+              progress={this.state.intermediateProgress}
+            />
+            <ProgressBar
+              title="Advanced"
+              progress={this.state.advancedProgress}
+            />
+          </div>
+        </Container>
       </React.Fragment>
     );
   }

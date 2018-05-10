@@ -3,6 +3,8 @@ import { Route, Link } from 'react-router-dom';
 import cx from 'classnames';
 
 import Header from '../Header';
+import Container from '../Container';
+import { SectionMenu, TopicList } from '../Section';
 
 import ConjugationExercise from './ConjugationExercise';
 
@@ -158,38 +160,47 @@ class Grammar extends Component {
   render() {
     const { match } = this.props;
     const section = this.state.sections.find(
-      topic => topic.section_name === this.state.activeSection,
+      topic => topic.section === this.state.activeSection,
     );
     const topics = section ? section.topics : [];
 
     return (
       <React.Fragment>
         <Header />
-        <SectionMenu
-          sections={this.state.sections.map(section => section.section_name)}
-          activeSection={this.state.activeSection}
-          onClick={this.handleChooseSection}
-        />
-        <Route
-          path={match.url}
-          exact
-          component={() => <TopicList topics={topics} />}
-        />
-        <Route
-          path={`${match.url}/:slug`}
-          component={({ match }) => {
-            const { slug } = match.params;
-            const allTopics = this.state.sections.reduce(
-              (allTopics, section) => {
-                return [...allTopics, ...section.topics];
-              },
-              [],
-            );
+        <Container>
+          <SectionMenu
+            sections={this.state.sections}
+            activeSection={this.state.activeSection}
+            onClick={this.handleChooseSection}
+          />
+          <Route
+            path={match.url}
+            exact
+            component={() => <TopicList topics={topics} />}
+          />
+          <Route
+            path={`${match.url}/:slug`}
+            component={({ match }) => {
+              const { slug } = match.params;
+              const allTopics = this.state.sections.reduce(
+                (allTopics, section) => {
+                  return [...allTopics, ...section.topics];
+                },
+                [],
+              );
 
-            const topic = allTopics.find(topic => topic.slug === slug);
-            return <h1>Exercise {topic.name}</h1>;
-          }}
-        />
+              const topic = allTopics.find(topic => topic.slug === slug);
+              const section = this.state.sections.find(
+                section => section.topics.indexOf(topic) !== -1,
+              );
+              if (this.state.activeSection !== section.section) {
+                this.setState({ activeSection: section.section });
+              }
+
+              return <h1>Exercise {topic.name}</h1>;
+            }}
+          />
+        </Container>
       </React.Fragment>
     );
   }
