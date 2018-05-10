@@ -1,13 +1,17 @@
 .header {
-  background: #94002D;
+  background-color: rgba(122, 0, 24, 0.9);
   box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.2), 0 8px 22px 0 rgba(0, 0, 0, 0.19);
   display: flex;
   justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
 }
 
 .header img {
-  margin-top: 8px;
-  margin-bottom: 5px;
+  margin-top: 10px;
+  margin-bottom: 7px;
   box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.2), 0 8px 22px 0 rgba(0, 0, 0, 0.19);
   border-radius: 15px;
 }
