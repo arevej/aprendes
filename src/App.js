@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
-import Grammar from './Grammar';
-import Vocabulary from './Vocabulary';
-import Listening from './Listening';
 import Course from './Course';
 import Button from './Buttons';
 
@@ -19,7 +16,7 @@ function Container({ children }) {
   return <div className="container">{children}</div>;
 }
 
-function Logo({}) {
+function Logo() {
   return (
     <div
       style={{
@@ -28,20 +25,8 @@ function Logo({}) {
       className="cover"
     >
       <Link to="/">
-        <img src={logo} height="100px" className="logo" />
+        <img src={logo} height="100px" className="logo" alt="" />
       </Link>
-    </div>
-  );
-}
-
-function Menu({ sections }) {
-  return (
-    <div className="menu">
-      {sections.map(section => (
-        <Link to={section.url} className="section">
-          {section.name}
-        </Link>
-      ))}
     </div>
   );
 }
@@ -64,20 +49,20 @@ function MainPage() {
         <div className="main-description">
           <h3>AprendES can help you to:</h3>
           <div className="main-description-section">
-            <img src={gram} className="main-description-section-icon" />
+            <img src={gram} className="main-description-section-icon" alt="" />
             <span className="main-description-section-text">
               Understand, practice and start to use Spanish{' '}
               <strong>grammar</strong> freely.
             </span>
           </div>
           <div className="main-description-section">
-            <img src={voc} className="main-description-section-icon" />
+            <img src={voc} className="main-description-section-icon" alt="" />
             <span className="main-description-section-text">
               Grow your Spanish <strong>vocabulary</strong>.
             </span>
           </div>
           <div className="main-description-section">
-            <img src={list} className="main-description-section-icon" />
+            <img src={list} className="main-description-section-icon" alt="" />
             <span className="main-description-section-text">
               Make your <strong>listening</strong> of Spanish more easier.
             </span>
@@ -107,18 +92,8 @@ class App extends Component {
         <React.Fragment>
           <Route path="/" exact component={MainPage} />
 
-          <Route path="/grammar" component={Grammar} />
-          <Route path="/vocabulary" component={Vocabulary} />
-          <Route path="/listening" component={Listening} />
           <Route path="/course" component={Course} />
 
-          <Menu
-            sections={[
-              { name: 'Grammar', url: '/grammar' },
-              { name: 'Vocabulary', url: '/vocabulary' },
-              { name: 'Listening', url: '/listening' },
-            ]}
-          />
           <Footer />
         </React.Fragment>
       </Router>
