@@ -97,22 +97,20 @@ const openBracketsExerciseQuestions = [
 
 const fillInBlankExerciseQuestions = [
   {
-    sentence: 'no ... en Madrid (vivir)',
-    subject: 'Yo',
+    sentence: 'Yo no vivo ... Madrid',
     correctSentence: 'Yo no vivo en Madrid',
     correctSentenceTranslation: "I don't live in Madrid",
-    translation: "I don't ... in Madrid (to live)",
-    answer: 'vivo',
+    translation: "I don't live ... in Madrid ",
+    answer: 'en',
     type: 'blank',
     format: FormatTaskFillBlank,
   },
   {
-    sentence: '... mucho (trabajar)',
-    subject: 'Marta',
-    correctSentence: 'Marta trabaja mucho',
-    correctSentenceTranslation: 'Marta works a lot',
-    translation: 'Marta ... a lot (to work)',
-    answer: 'trabaja',
+    sentence: 'Ella va ... la escuela',
+    correctSentence: 'Ella va a la escuela',
+    correctSentenceTranslation: 'She goes to school',
+    translation: 'She goes ... school',
+    answer: 'a',
     type: 'blank',
     format: FormatTaskFillBlank,
   },
@@ -209,7 +207,7 @@ class Course extends Component {
         component: (
           <Exercise
             questions={fillInBlankExerciseQuestions}
-            task="Fill in blank with correct verb form:"
+            task="Fill in blank with a missing preposion:"
             onDone={() => this.handleMarkExerciseAsDone('fill_in_blank')}
           />
         ),

@@ -4,6 +4,8 @@ import { Redirect } from 'react-router';
 
 import './Exercise.css';
 
+const TIME_OUT = 1500;
+
 function Option({ isDisabled, isActive, text, onClick }) {
   return (
     <div
@@ -42,7 +44,46 @@ function Options({ tries, question, onClick }) {
   );
 }
 
-const TIME_OUT = 1500;
+function Blank({
+  onSubmit,
+  typedAnswer,
+  onChange,
+  tries,
+  hasTries,
+  hasOnlyWrongTries,
+  isChosenCorrectAnswer,
+}) {
+  return (
+    <div
+      style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}
+    >
+      <form
+        onSubmit={onSubmit}
+        style={{ display: 'flex', flexDirection: 'column' }}
+      >
+        <input
+          type="text"
+          value={typedAnswer}
+          onChange={onChange}
+          autofocus="true"
+          className="exercise-item-with-blank-input"
+          style={
+            hasTries &&
+            hasOnlyWrongTries &&
+            typedAnswer === tries[tries.length - 1]
+              ? { color: 'red' }
+              : isChosenCorrectAnswer ? { color: 'green' } : null
+          }
+        />
+        <input className="button" type="submit" value="Submit" />
+      </form>
+    </div>
+  );
+}
 
 class ExerciseItem extends Component {
   state = {
@@ -123,47 +164,6 @@ class ExerciseItem extends Component {
       </div>
     );
   }
-}
-
-function Blank({
-  onSubmit,
-  typedAnswer,
-  onChange,
-  tries,
-  hasTries,
-  hasOnlyWrongTries,
-  isChosenCorrectAnswer,
-}) {
-  return (
-    <div
-      style={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}
-    >
-      <form
-        onSubmit={onSubmit}
-        style={{ display: 'flex', flexDirection: 'column' }}
-      >
-        <input
-          type="text"
-          value={typedAnswer}
-          onChange={onChange}
-          autofocus="true"
-          className="exercise-item-with-blank-input"
-          style={
-            hasTries &&
-            hasOnlyWrongTries &&
-            typedAnswer === tries[tries.length - 1]
-              ? { color: 'red' }
-              : isChosenCorrectAnswer ? { color: 'green' } : null
-          }
-        />
-        <input className="button" type="submit" value="Submit" />
-      </form>
-    </div>
-  );
 }
 
 class Exercise extends Component {

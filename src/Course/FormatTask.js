@@ -80,13 +80,7 @@ export function FormatTaskFillBlank(question, hasError, isCorrect) {
         </React.Fragment>
       ) : (
         <React.Fragment>
-          <div className="course-exercise-question">
-            <span style={hasError ? { color: 'red' } : null}>
-              {question.subject}
-            </span>
-            &nbsp;
-            {question.sentence}
-          </div>
+          <div className="course-exercise-question">{question.sentence}</div>
           <div className="course-exercise-question-translation">
             {question.translation}
           </div>
