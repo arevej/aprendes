@@ -161,7 +161,6 @@ class Course extends Component {
                     progress={this.state.advancedProgress}
                   />
                 </div>
-
                 <div className="topic-list">
                   {this.state.topics.map(topic => (
                     <Link
@@ -169,7 +168,8 @@ class Course extends Component {
                       to={`${match.url}/${topic.slug}`}
                       key={topic.slug}
                     >
-                      {topic.name}
+                      <span>{topic.name}</span>
+                      {isDone(topic.slug) ? <span>Done</span> : null}
                     </Link>
                   ))}
                 </div>
@@ -177,7 +177,7 @@ class Course extends Component {
             )}
           />
 
-          <Route path={`${match.url}/:slug`} component={ExerciseComponent} />
+          <Route path={`${match.url}/:slug`} render={ExerciseComponent} />
         </Container>
       </React.Fragment>
     );

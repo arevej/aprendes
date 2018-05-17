@@ -4,7 +4,7 @@ function Container({ children }) {
   return (
     <div
       style={{
-        marginTop: '100px',
+        marginTop: '150px',
         marginLeft: '150px',
         marginRight: '150px',
         marginBottom: '30px',

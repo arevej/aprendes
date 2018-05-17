@@ -10,7 +10,6 @@
   justify-content: center;
   align-items: center;
   width: 20%;
-  margin: 50px 0;
 }
 
 .progressbar-circle {
@@ -23,4 +22,28 @@
 
 .switch-wrapper > div {
   position: absolute;
+}
+
+.topic-list {
+  display: flex;
+  flex-direction: column;
+  margin-top: 50px;
+}
+
+.topic-list a {
+  color: #111;
+}
+
+.topic-list-item {
+  border: 1px solid #aaa;
+  border-radius: 7px;
+  padding: 18px;
+  margin-bottom: 18px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.topic-list-item:hover {
+  box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.2), 0 4px 11px 0 rgba(0, 0, 0, 0.19);
+  border-color: #ddd;
 }

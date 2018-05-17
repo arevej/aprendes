@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Noto+Sans');
 
-.conjugation-exercise-title {
+.course-exercise-title {
   font-family: 'Noto Sans', sans-serif;
   font-size: 35px;
   font-weight: 400;
@@ -10,13 +10,14 @@
   margin-bottom: 32px;
 }
 
-.conjugation-exercise-question {
+.course-exercise-question {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.conjugation-exercise-question-translation {
+.course-exercise-question-translation {
   font-size: 18px;
   color: #aaa;
+  margin-top: 10px;
 }
