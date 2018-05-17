@@ -2,13 +2,17 @@ import React, { Component } from 'react';
 import { Route, Link } from 'react-router-dom';
 import { AnimatedSwitch } from 'react-router-transition';
 
-import ChooseOption from './ChooseOption';
-import OpenBracketsExercise from './OpenBracketsExercise';
-import FillInBlank from './FillInBlank';
-import UnderstandSpeech from './UnderstandSpeech';
+import Exercise from '../Exercise';
 
 import Header from '../Header';
 import Container from '../Container';
+
+import {
+  FormatTaskOpenBrackets,
+  FormatTaskFillBlank,
+  FormatTaskUnderstandSpeech,
+  FormatTaskChooseOption,
+} from './FormatTask';
 
 import CircularProgressbar from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
@@ -21,73 +25,49 @@ const chooseOptionExerciseQuestions = [
     translation: 'to speak',
     options: ['1st', '2nd', '3rd'],
     answer: '1st',
+    type: 'options',
+    format: FormatTaskChooseOption,
   },
   {
     verb: 'comer',
     translation: 'to eat',
     options: ['1st', '2nd', '3rd'],
     answer: '2nd',
+    type: 'options',
+    format: FormatTaskChooseOption,
   },
-  // {
-  //   verb: 'creer',
-  //   translation: 'to believe',
-  //   options: ['1st', '2nd', '3rd'],
-  //   answer: '2nd',
-  // },
-  // {
-  //   verb: 'ayudar',
-  //   translation: 'to help',
-  //   options: ['1st', '2nd', '3rd'],
-  //   answer: '1st',
-  // },
-  // {
-  //   verb: 'vivir',
-  //   translation: 'to live',
-  //   options: ['1st', '2nd', '3rd'],
-  //   answer: '3rd',
-  // },
-  // {
-  //   verb: 'entrar',
-  //   translation: 'to enter',
-  //   options: ['1st', '2nd', '3rd'],
-  //   answer: '1st',
-  // },
-  // {
-  //   verb: 'escribir',
-  //   translation: 'to write',
-  //   options: ['1st', '2nd', '3rd'],
-  //   answer: '3rd',
-  // },
-  // {
-  //   verb: 'leer',
-  //   translation: 'to read',
-  //   options: ['1st', '2nd', '3rd'],
-  //   answer: '2nd',
-  // },
-  // {
-  //   verb: 'mirar',
-  //   translation: 'to watch',
-  //   options: ['1st', '2nd', '3rd'],
-  //   answer: '1st',
-  // },
-  // {
-  //   verb: 'ocurrir',
-  //   translation: 'to happen',
-  //   options: ['1st', '2nd', '3rd'],
-  //   answer: '3rd',
-  // },
-  // {
-  //   verb: 'comprender',
-  //   translation: 'to understand',
-  //   options: ['1st', '2nd', '3rd'],
-  //   answer: '2nd',
-  // },
-  // {
-  //   verb: 'esperar',
-  //   translation: 'to wait',
-  //   options: ['1st', '2nd', '3rd'],
-  //   answer: '1st',
-  // },
+  {
+    verb: 'creer',
+    translation: 'to believe',
+    options: ['1st', '2nd', '3rd'],
+    answer: '2nd',
+    type: 'options',
+    format: FormatTaskChooseOption,
+  },
+  {
+    verb: 'ayudar',
+    translation: 'to help',
+    options: ['1st', '2nd', '3rd'],
+    answer: '1st',
+    type: 'options',
+    format: FormatTaskChooseOption,
+  },
+  {
+    verb: 'vivir',
+    translation: 'to live',
+    options: ['1st', '2nd', '3rd'],
+    answer: '3rd',
+    type: 'options',
+    format: FormatTaskChooseOption,
+  },
+  {
+    verb: 'entrar',
+    translation: 'to enter',
+    options: ['1st', '2nd', '3rd'],
+    answer: '1st',
+    type: 'options',
+    format: FormatTaskChooseOption,
+  },
 ];
 
 const openBracketsExerciseQuestions = [
@@ -99,15 +79,19 @@ const openBracketsExerciseQuestions = [
     translation: 'I (to live) ... in Spain',
     options: ['vive', 'viven', 'vivo'],
     answer: 'vivo',
+    type: 'blank',
+    format: FormatTaskOpenBrackets,
   },
   {
-    sentence: '(hablo) ... ruso',
+    sentence: '(hablar) ... ruso',
     subject: 'Nosotros ',
     correctSentence: 'Nosotros hablamos ruso',
     correctSentenceTranslation: 'We speak Russian',
     translation: 'We (to speak) ... Russian',
     options: ['hablen', 'hablamos', 'hables'],
     answer: 'hablamos',
+    type: 'blank',
+    format: FormatTaskOpenBrackets,
   },
 ];
 
@@ -119,6 +103,8 @@ const fillInBlankExerciseQuestions = [
     correctSentenceTranslation: "I don't live in Madrid",
     translation: "I don't ... in Madrid (to live)",
     answer: 'vivo',
+    type: 'blank',
+    format: FormatTaskFillBlank,
   },
   {
     sentence: '... mucho (trabajar)',
@@ -127,6 +113,8 @@ const fillInBlankExerciseQuestions = [
     correctSentenceTranslation: 'Marta works a lot',
     translation: 'Marta ... a lot (to work)',
     answer: 'trabaja',
+    type: 'blank',
+    format: FormatTaskFillBlank,
   },
 ];
 
@@ -135,21 +123,37 @@ const understandSpeechExerciseQuestions = [
     sentence: 'Yo no como manzanas',
     sentenceTranslation: "I don't eat apples",
     answer: 'yo no como manzanas',
+    type: 'blank',
+    format: FormatTaskUnderstandSpeech,
+  },
+  {
+    verb: 'hablar',
+    translation: 'to speak',
+    options: ['1st', '2nd', '3rd'],
+    answer: '1st',
+    type: 'options',
+    format: FormatTaskChooseOption,
   },
   {
     sentence: 'Ella descansa en casa',
     sentenceTranslation: 'She rests at home',
     answer: 'ella descansa en casa',
+    type: 'blank',
+    format: FormatTaskUnderstandSpeech,
   },
   {
     sentence: 'Nosotros leemos un libro',
     sentenceTranslation: 'We read a book',
     answer: 'nosotros leemos un libro',
+    type: 'blank',
+    format: FormatTaskUnderstandSpeech,
   },
   {
     sentence: 'Ellos no beben vino',
     sentenceTranslation: "They don't drink vine",
     answer: 'ellos no beben vino',
+    type: 'blank',
+    format: FormatTaskUnderstandSpeech,
   },
 ];
 
@@ -181,8 +185,9 @@ class Course extends Component {
         name: 'Choose an option',
         slug: 'choose_opt',
         component: (
-          <ChooseOption
+          <Exercise
             questions={chooseOptionExerciseQuestions}
+            task="Choose correct group (conjugation)"
             onDone={() => this.handleMarkExerciseAsDone('choose_opt')}
           />
         ),
@@ -191,8 +196,9 @@ class Course extends Component {
         name: 'Open Brackets',
         slug: 'open_brackets',
         component: (
-          <OpenBracketsExercise
+          <Exercise
             questions={openBracketsExerciseQuestions}
+            task="Choose correct verb form:"
             onDone={() => this.handleMarkExerciseAsDone('open_brackets')}
           />
         ),
@@ -201,8 +207,9 @@ class Course extends Component {
         name: 'Fill in blank',
         slug: 'fill_in_blank',
         component: (
-          <FillInBlank
+          <Exercise
             questions={fillInBlankExerciseQuestions}
+            task="Fill in blank with correct verb form:"
             onDone={() => this.handleMarkExerciseAsDone('fill_in_blank')}
           />
         ),
@@ -211,8 +218,9 @@ class Course extends Component {
         name: 'Understand a speech',
         slug: 'understand_speech',
         component: (
-          <UnderstandSpeech
+          <Exercise
             questions={understandSpeechExerciseQuestions}
+            task="Fill in blank with speech text:"
             onDone={() => this.handleMarkExerciseAsDone('understand_speech')}
           />
         ),

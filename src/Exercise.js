@@ -4,7 +4,7 @@ import { Redirect } from 'react-router';
 
 import './Exercise.css';
 
-export function Option({ isDisabled, isActive, text, onClick }) {
+function Option({ isDisabled, isActive, text, onClick }) {
   return (
     <div
       className={
@@ -19,60 +19,32 @@ export function Option({ isDisabled, isActive, text, onClick }) {
   );
 }
 
-class ExerciseItemWithOptions extends Component {
-  state = {
-    tries: [],
-  };
-
-  chooseOption = chosenAnswer => () => {
-    if (this.props.question.answer === chosenAnswer) {
-      this.setState({ tries: [...this.state.tries, chosenAnswer] });
-      setTimeout(() => this.props.onCorrectAnswer(), this.props.timeOut);
-    } else {
-      this.setState({ tries: [...this.state.tries, chosenAnswer] });
-    }
-  };
-
-  render() {
-    const { question, isLastQuestion } = this.props;
-    const wasPressed = option => this.state.tries.indexOf(option) !== -1;
-    const hasTries = this.state.tries.length > 0;
-    const hasOnlyWrongTries = this.state.tries.indexOf(question.answer) === -1;
-    const isChosenCorrectAnswer =
-      this.state.tries[this.state.tries.length - 1] ===
-      this.props.question.answer;
-    return (
-      <div>
-        <div>
-          {this.props.formatTaskDescription(
-            question,
-            hasTries && hasOnlyWrongTries,
-            isChosenCorrectAnswer,
-          )}
-        </div>
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}
-        >
-          {question.options.map((option, index) => (
-            <Option
-              key={index}
-              onClick={this.chooseOption(option)}
-              isActive={question.answer === option && wasPressed(option)}
-              isDisabled={question.answer !== option && wasPressed(option)}
-              text={option}
-            />
-          ))}
-        </div>
-      </div>
-    );
-  }
+function Options({ tries, question, onClick }) {
+  const wasPressed = option => tries.indexOf(option) !== -1;
+  return (
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+      }}
+    >
+      {question.options.map((option, index) => (
+        <Option
+          key={index}
+          onClick={onClick(option)}
+          isActive={question.answer === option && wasPressed(option)}
+          isDisabled={question.answer !== option && wasPressed(option)}
+          text={option}
+        />
+      ))}
+    </div>
+  );
 }
 
-class ExerciseItemWithBlank extends Component {
+const TIME_OUT = 1500;
+
+class ExerciseItem extends Component {
   state = {
     typedAnswer: '',
     tries: [],
@@ -81,16 +53,24 @@ class ExerciseItemWithBlank extends Component {
   handleRightAnswer = event => {
     event.preventDefault();
     const { typedAnswer } = this.state;
-
     if (this.props.question.answer === typedAnswer.toLowerCase()) {
       this.setState({
-        tries: [...this.state.tries, typedAnswer],
+        tries: [...this.state.tries, typedAnswer.toLowerCase()],
       });
-      setTimeout(() => this.props.onCorrectAnswer(), this.props.timeOut);
+      setTimeout(() => this.props.onCorrectAnswer(), TIME_OUT);
     } else {
       this.setState({
-        tries: [...this.state.tries, typedAnswer],
+        tries: [...this.state.tries, typedAnswer.toLowerCase()],
       });
+    }
+  };
+
+  chooseOption = chosenAnswer => () => {
+    if (this.props.question.answer === chosenAnswer) {
+      this.setState({ tries: [...this.state.tries, chosenAnswer] });
+      setTimeout(() => this.props.onCorrectAnswer(), TIME_OUT);
+    } else {
+      this.setState({ tries: [...this.state.tries, chosenAnswer] });
     }
   };
 
@@ -100,7 +80,6 @@ class ExerciseItemWithBlank extends Component {
 
   render() {
     const { question } = this.props;
-
     const hasTries = this.state.tries.length > 0;
     const hasOnlyWrongTries = this.state.tries.indexOf(question.answer) === -1;
     const isChosenCorrectAnswer =
@@ -115,38 +94,76 @@ class ExerciseItemWithBlank extends Component {
             isChosenCorrectAnswer,
           )}
         </div>
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-        >
-          <form
-            onSubmit={this.handleRightAnswer}
-            style={{ display: 'flex', flexDirection: 'column' }}
-          >
-            <input
-              type="text"
-              value={this.state.typedAnswer}
-              onChange={this.handleChange}
-              autofocus="true"
-              className="exercise-item-with-blank-input"
-              style={
-                hasTries &&
-                hasOnlyWrongTries &&
-                this.state.typedAnswer ===
-                  this.state.tries[this.state.tries.length - 1]
-                  ? { color: 'red' }
-                  : isChosenCorrectAnswer ? { color: 'green' } : null
-              }
-            />
-            <input className="button" type="submit" value="Submit" />
-          </form>
-        </div>
+        {(() => {
+          switch (question.type) {
+            case 'options':
+              return (
+                <Options
+                  tries={this.state.tries}
+                  question={question}
+                  onClick={this.chooseOption}
+                />
+              );
+            case 'blank':
+              return (
+                <Blank
+                  onSubmit={this.handleRightAnswer}
+                  typedAnswer={this.state.typedAnswer}
+                  onChange={this.handleChange}
+                  tries={this.state.tries}
+                  hasTries={hasTries}
+                  hasOnlyWrongTries={hasOnlyWrongTries}
+                  isChosenCorrectAnswer={isChosenCorrectAnswer}
+                />
+              );
+            default:
+              return <div>Choose exercise type</div>;
+          }
+        })()}
       </div>
     );
   }
+}
+
+function Blank({
+  onSubmit,
+  typedAnswer,
+  onChange,
+  tries,
+  hasTries,
+  hasOnlyWrongTries,
+  isChosenCorrectAnswer,
+}) {
+  return (
+    <div
+      style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}
+    >
+      <form
+        onSubmit={onSubmit}
+        style={{ display: 'flex', flexDirection: 'column' }}
+      >
+        <input
+          type="text"
+          value={typedAnswer}
+          onChange={onChange}
+          autofocus="true"
+          className="exercise-item-with-blank-input"
+          style={
+            hasTries &&
+            hasOnlyWrongTries &&
+            typedAnswer === tries[tries.length - 1]
+              ? { color: 'red' }
+              : isChosenCorrectAnswer ? { color: 'green' } : null
+          }
+        />
+        <input className="button" type="submit" value="Submit" />
+      </form>
+    </div>
+  );
 }
 
 class Exercise extends Component {
@@ -164,7 +181,7 @@ class Exercise extends Component {
     return this.state.currentQuestionIndex + 1 === this.props.questions.length;
   }
 
-  handleCorrectAnswer = () => {
+  handleExerciseDone = () => {
     if (!this.isLastQuestion()) {
       this.setState({
         currentQuestionIndex: this.state.currentQuestionIndex + 1,
@@ -192,42 +209,14 @@ class Exercise extends Component {
         </span>
       </div>
     ) : (
-      <div
-        className="exercise"
-        style={{
-          background: this.props.color,
-          width: this.props.width,
-        }}
-      >
-        {(() => {
-          switch (this.props.type) {
-            case 'options':
-              return (
-                <ExerciseItemWithOptions
-                  key={this.state.currentQuestionIndex}
-                  question={question}
-                  formatTaskDescription={this.props.formatTaskDescription}
-                  isLastQuestion={this.isLastQuestion()}
-                  onCorrectAnswer={this.handleCorrectAnswer}
-                  timeOut={this.props.timeOut}
-                />
-              );
-            case 'blank':
-              return (
-                <ExerciseItemWithBlank
-                  key={this.state.currentQuestionIndex}
-                  question={question}
-                  formatTaskDescription={this.props.formatTaskDescription}
-                  isLastQuestion={this.isLastQuestion()}
-                  onCorrectAnswer={this.handleCorrectAnswer}
-                  timeOut={this.props.timeOut}
-                />
-              );
-            default:
-              return <div>Choose exercise type</div>;
-          }
-        })()}
-
+      <div className="exercise">
+        <ExerciseItem
+          key={this.state.currentQuestionIndex}
+          question={question}
+          formatTaskDescription={question.format}
+          isLastQuestion={this.isLastQuestion()}
+          onCorrectAnswer={this.handleExerciseDone}
+        />
         <div className="exercise-progress">
           {this.state.currentQuestionIndex + 1} / {this.props.questions.length}
         </div>
