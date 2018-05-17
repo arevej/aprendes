@@ -2,6 +2,11 @@ import React, { Component } from 'react';
 import { Route, Link } from 'react-router-dom';
 import { AnimatedSwitch } from 'react-router-transition';
 
+import ChooseOption from './ChooseOption';
+import OpenBracketsExercise from './OpenBracketsExercise';
+import FillInBlank from './FillInBlank';
+import UnderstandSpeech from './UnderstandSpeech';
+
 import Header from '../Header';
 import Container from '../Container';
 
@@ -10,7 +15,7 @@ import 'react-circular-progressbar/dist/styles.css';
 
 import './index.css';
 
-const conjugationExerciseQuestions = [
+const chooseOptionExerciseQuestions = [
   {
     verb: 'hablar',
     translation: 'to speak',
@@ -23,65 +28,128 @@ const conjugationExerciseQuestions = [
     options: ['1st', '2nd', '3rd'],
     answer: '2nd',
   },
+  // {
+  //   verb: 'creer',
+  //   translation: 'to believe',
+  //   options: ['1st', '2nd', '3rd'],
+  //   answer: '2nd',
+  // },
+  // {
+  //   verb: 'ayudar',
+  //   translation: 'to help',
+  //   options: ['1st', '2nd', '3rd'],
+  //   answer: '1st',
+  // },
+  // {
+  //   verb: 'vivir',
+  //   translation: 'to live',
+  //   options: ['1st', '2nd', '3rd'],
+  //   answer: '3rd',
+  // },
+  // {
+  //   verb: 'entrar',
+  //   translation: 'to enter',
+  //   options: ['1st', '2nd', '3rd'],
+  //   answer: '1st',
+  // },
+  // {
+  //   verb: 'escribir',
+  //   translation: 'to write',
+  //   options: ['1st', '2nd', '3rd'],
+  //   answer: '3rd',
+  // },
+  // {
+  //   verb: 'leer',
+  //   translation: 'to read',
+  //   options: ['1st', '2nd', '3rd'],
+  //   answer: '2nd',
+  // },
+  // {
+  //   verb: 'mirar',
+  //   translation: 'to watch',
+  //   options: ['1st', '2nd', '3rd'],
+  //   answer: '1st',
+  // },
+  // {
+  //   verb: 'ocurrir',
+  //   translation: 'to happen',
+  //   options: ['1st', '2nd', '3rd'],
+  //   answer: '3rd',
+  // },
+  // {
+  //   verb: 'comprender',
+  //   translation: 'to understand',
+  //   options: ['1st', '2nd', '3rd'],
+  //   answer: '2nd',
+  // },
+  // {
+  //   verb: 'esperar',
+  //   translation: 'to wait',
+  //   options: ['1st', '2nd', '3rd'],
+  //   answer: '1st',
+  // },
+];
+
+const openBracketsExerciseQuestions = [
   {
-    verb: 'creer',
-    translation: 'to believe',
-    options: ['1st', '2nd', '3rd'],
-    answer: '2nd',
+    sentence: '(vivir) ... en España',
+    subject: 'Yo',
+    correctSentence: 'Yo vivo en España',
+    correctSentenceTranslation: 'I live in Spain',
+    translation: 'I (to live) ... in Spain',
+    options: ['vive', 'viven', 'vivo'],
+    answer: 'vivo',
   },
   {
-    verb: 'ayudar',
-    translation: 'to help',
-    options: ['1st', '2nd', '3rd'],
-    answer: '1st',
+    sentence: '(hablo) ... ruso',
+    subject: 'Nosotros ',
+    correctSentence: 'Nosotros hablamos ruso',
+    correctSentenceTranslation: 'We speak Russian',
+    translation: 'We (to speak) ... Russian',
+    options: ['hablen', 'hablamos', 'hables'],
+    answer: 'hablamos',
+  },
+];
+
+const fillInBlankExerciseQuestions = [
+  {
+    sentence: 'no ... en Madrid (vivir)',
+    subject: 'Yo',
+    correctSentence: 'Yo no vivo en Madrid',
+    correctSentenceTranslation: "I don't live in Madrid",
+    translation: "I don't ... in Madrid (to live)",
+    answer: 'vivo',
   },
   {
-    verb: 'vivir',
-    translation: 'to live',
-    options: ['1st', '2nd', '3rd'],
-    answer: '3rd',
+    sentence: '... mucho (trabajar)',
+    subject: 'Marta',
+    correctSentence: 'Marta trabaja mucho',
+    correctSentenceTranslation: 'Marta works a lot',
+    translation: 'Marta ... a lot (to work)',
+    answer: 'trabaja',
+  },
+];
+
+const understandSpeechExerciseQuestions = [
+  {
+    sentence: 'Yo no como manzanas',
+    sentenceTranslation: "I don't eat apples",
+    answer: 'yo no como manzanas',
   },
   {
-    verb: 'entrar',
-    translation: 'to enter',
-    options: ['1st', '2nd', '3rd'],
-    answer: '1st',
+    sentence: 'Ella descansa en casa',
+    sentenceTranslation: 'She rests at home',
+    answer: 'ella descansa en casa',
   },
   {
-    verb: 'escribir',
-    translation: 'to write',
-    options: ['1st', '2nd', '3rd'],
-    answer: '3rd',
+    sentence: 'Nosotros leemos un libro',
+    sentenceTranslation: 'We read a book',
+    answer: 'nosotros leemos un libro',
   },
   {
-    verb: 'leer',
-    translation: 'to read',
-    options: ['1st', '2nd', '3rd'],
-    answer: '2nd',
-  },
-  {
-    verb: 'mirar',
-    translation: 'to watch',
-    options: ['1st', '2nd', '3rd'],
-    answer: '1st',
-  },
-  {
-    verb: 'ocurrir',
-    translation: 'to happen',
-    options: ['1st', '2nd', '3rd'],
-    answer: '3rd',
-  },
-  {
-    verb: 'comprender',
-    translation: 'to understand',
-    options: ['1st', '2nd', '3rd'],
-    answer: '2nd',
-  },
-  {
-    verb: 'esperar',
-    translation: 'to wait',
-    options: ['1st', '2nd', '3rd'],
-    answer: '1st',
+    sentence: 'Ellos no beben vino',
+    sentenceTranslation: "They don't drink vine",
+    answer: 'ellos no beben vino',
   },
 ];
 
@@ -109,22 +177,54 @@ class Course extends Component {
     intermediateProgress: 0,
     advancedProgress: 0,
     topics: [
-      { name: 'Presente de Indicativo', slug: 'presente_de_ind' },
       {
-        name: 'Preterito Perfecto de Indicativo',
-        slug: 'preterito_perfecto_de_ind',
+        name: 'Choose an option',
+        slug: 'choose_opt',
+        component: (
+          <ChooseOption
+            questions={chooseOptionExerciseQuestions}
+            onDone={() => this.handleMarkExerciseAsDone('choose_opt')}
+          />
+        ),
       },
-      { name: 'Futuro Simple', slug: 'futuro_simple' },
       {
-        name: 'Preterito Imperfecto de Indicativo',
-        slug: 'preterito_imperfecto_de_ind',
+        name: 'Open Brackets',
+        slug: 'open_brackets',
+        component: (
+          <OpenBracketsExercise
+            questions={openBracketsExerciseQuestions}
+            onDone={() => this.handleMarkExerciseAsDone('open_brackets')}
+          />
+        ),
       },
-      { name: 'Preterito Indefenido', slug: 'preterito_indefenido' },
       {
-        name: 'Preterito Pluscuamperfecto de Indicativo',
-        slug: 'preterito_plucuamperfecto_de_ind',
+        name: 'Fill in blank',
+        slug: 'fill_in_blank',
+        component: (
+          <FillInBlank
+            questions={fillInBlankExerciseQuestions}
+            onDone={() => this.handleMarkExerciseAsDone('fill_in_blank')}
+          />
+        ),
+      },
+      {
+        name: 'Understand a speech',
+        slug: 'understand_speech',
+        component: (
+          <UnderstandSpeech
+            questions={understandSpeechExerciseQuestions}
+            onDone={() => this.handleMarkExerciseAsDone('understand_speech')}
+          />
+        ),
       },
     ],
+    doneExercises: [],
+  };
+
+  handleMarkExerciseAsDone = slug => {
+    this.setState({
+      doneExercises: [...this.state.doneExercises, { slug: slug }],
+    });
   };
 
   render() {
@@ -133,10 +233,14 @@ class Course extends Component {
 
       const topic = this.state.topics.find(topic => topic.slug === slug);
 
-      return <h1>Exercise {topic.name}</h1>;
+      return <div>{topic.component}</div>;
     };
 
     const { match } = this.props;
+    const isDone = slug => {
+      return this.state.doneExercises.find(exercise => exercise.slug === slug);
+    };
+
     return (
       <React.Fragment>
         <Container>

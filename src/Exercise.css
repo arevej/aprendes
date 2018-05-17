@@ -73,3 +73,11 @@
   margin-bottom: 13px;
   color: #bf0d0d;
 }
+
+.exercise-item-with-blank-input {
+  border: 1px solid #ddd;
+  border-radius: 13px;
+  padding: 10px 20px;
+  font-size: 20px;
+  margin-bottom: 30px;
+}
