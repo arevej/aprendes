@@ -5,6 +5,16 @@ import { Redirect } from 'react-router';
 import './Exercise.css';
 
 const TIME_OUT = 1500;
+const displayStyle = {
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  justifyContent: 'center',
+};
+
+function ExerciseItemContainer({ children }) {
+  return <div className="exercise-item-container">{children}</div>;
+}
 
 function compareArrays(a, b) {
   if (a && b) {
@@ -38,13 +48,7 @@ function Option({ isDisabled, isActive, text, onClick }) {
 function Options({ tries, question, onClick }) {
   const wasPressed = option => tries.indexOf(option) !== -1;
   return (
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-      }}
-    >
+    <div style={displayStyle}>
       {question.options.map((option, index) => (
         <Option
           key={index}
@@ -68,13 +72,7 @@ function Input({
   isChosenCorrectAnswer,
 }) {
   return (
-    <div
-      style={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}
-    >
+    <div style={displayStyle}>
       <form
         onSubmit={onSubmit}
         style={{ display: 'flex', flexDirection: 'column' }}
@@ -93,7 +91,9 @@ function Input({
               : isChosenCorrectAnswer ? { color: 'green' } : null
           }
         />
-        <input className="button" type="submit" value="Submit" />
+        <div style={{ textAlign: 'center', marginTop: 10 }}>
+          <input className="button" type="submit" value="Submit" />
+        </div>
       </form>
     </div>
   );
@@ -139,48 +139,45 @@ class Inputs extends Component {
 
     const lastTry = this.state.tries[this.state.tries.length - 1];
     return (
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          flexDirection: 'column',
-        }}
-      >
-        <form
-          onSubmit={this.handleRightAnswers}
-          style={{ display: 'flex', flexDirection: 'column' }}
-        >
-          <div className="inputs">
-            {questionParts.map((part, idx) => (
-              <React.Fragment>
-                <span>{part}</span>
-                {idx !== questionParts.length - 1 ? (
-                  <input
-                    type="text"
-                    value={this.state.typedAnswers[idx] || ''}
-                    onChange={evt => this.handleChange(evt, idx)}
-                    autoFocus={idx === 0 ? true : false}
-                    className="exercise-item-input"
-                    style={
-                      isChosenCorrectAnswer(idx)
-                        ? { color: 'green' }
-                        : lastTry
-                          ? this.state.typedAnswers[idx] === lastTry[idx] &&
-                            this.state.typedAnswers[idx] !==
-                              this.props.question.answer[idx]
-                            ? { color: 'red' }
+      <ExerciseItemContainer>
+        <div style={displayStyle}>
+          <form
+            onSubmit={this.handleRightAnswers}
+            style={{ display: 'flex', flexDirection: 'column' }}
+          >
+            <div className="inputs">
+              {questionParts.map((part, idx) => (
+                <React.Fragment>
+                  <span>{part}</span>
+                  {idx !== questionParts.length - 1 ? (
+                    <input
+                      type="text"
+                      value={this.state.typedAnswers[idx] || ''}
+                      onChange={evt => this.handleChange(evt, idx)}
+                      autoFocus={idx === 0 ? true : false}
+                      className="exercise-item-input"
+                      style={
+                        isChosenCorrectAnswer(idx)
+                          ? { color: 'green' }
+                          : lastTry
+                            ? this.state.typedAnswers[idx] === lastTry[idx] &&
+                              this.state.typedAnswers[idx] !==
+                                this.props.question.answer[idx]
+                              ? { color: 'red' }
+                              : null
                             : null
-                          : null
-                    }
-                  />
-                ) : null}
-              </React.Fragment>
-            ))}
-          </div>
-          <input className="button" type="submit" value="Submit" />
-        </form>
-      </div>
+                      }
+                    />
+                  ) : null}
+                </React.Fragment>
+              ))}
+            </div>
+            <div style={{ textAlign: 'center', marginTop: 10 }}>
+              <input className="button" type="submit" value="Submit" />
+            </div>
+          </form>
+        </div>
+      </ExerciseItemContainer>
     );
   }
 }
@@ -227,41 +224,43 @@ class ExerciseItem extends Component {
       this.state.tries[this.state.tries.length - 1] ===
       this.props.question.answer;
     return (
-      <div>
+      <ExerciseItemContainer>
         <div>
-          {this.props.formatTaskDescription(
-            question,
-            hasTries && hasOnlyWrongTries,
-            isChosenCorrectAnswer,
-          )}
+          <div>
+            {this.props.formatTaskDescription(
+              question,
+              hasTries && hasOnlyWrongTries,
+              isChosenCorrectAnswer,
+            )}
+          </div>
+          {(() => {
+            switch (question.type) {
+              case 'options':
+                return (
+                  <Options
+                    tries={this.state.tries}
+                    question={question}
+                    onClick={this.chooseOption}
+                  />
+                );
+              case 'input':
+                return (
+                  <Input
+                    onSubmit={this.handleRightAnswer}
+                    typedAnswer={this.state.typedAnswer}
+                    onChange={this.handleChange}
+                    tries={this.state.tries}
+                    hasTries={hasTries}
+                    hasOnlyWrongTries={hasOnlyWrongTries}
+                    isChosenCorrectAnswer={isChosenCorrectAnswer}
+                  />
+                );
+              default:
+                return <div>Choose exercise type</div>;
+            }
+          })()}
         </div>
-        {(() => {
-          switch (question.type) {
-            case 'options':
-              return (
-                <Options
-                  tries={this.state.tries}
-                  question={question}
-                  onClick={this.chooseOption}
-                />
-              );
-            case 'input':
-              return (
-                <Input
-                  onSubmit={this.handleRightAnswer}
-                  typedAnswer={this.state.typedAnswer}
-                  onChange={this.handleChange}
-                  tries={this.state.tries}
-                  hasTries={hasTries}
-                  hasOnlyWrongTries={hasOnlyWrongTries}
-                  isChosenCorrectAnswer={isChosenCorrectAnswer}
-                />
-              );
-            default:
-              return <div>Choose exercise type</div>;
-          }
-        })()}
-      </div>
+      </ExerciseItemContainer>
     );
   }
 }

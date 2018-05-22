@@ -5,29 +5,27 @@ import './CourseExercise.css';
 
 export function FormatTaskOpenBrackets(question, hasError, isCorrect) {
   return (
-    <div className="course-exercise-title">
+    <div className="format-task">
       {isCorrect ? (
         <React.Fragment>
-          <div className="course-exercise-question">
+          <div className="format-task-question">
             <span>{question.correctSentence}</span>
             <ButtonToVoice text={question.correctSentence} />
           </div>
-          <div className="course-exercise-question-translation">
+          <div className="format-task-translation">
             {question.correctSentenceTranslation}
           </div>
         </React.Fragment>
       ) : (
         <React.Fragment>
-          <div className="course-exercise-question">
+          <div className="format-task-question">
             <span style={hasError ? { color: 'red' } : null}>
               {question.subject}
             </span>
             &nbsp;
             {question.sentence}
           </div>
-          <div className="course-exercise-question-translation">
-            {question.translation}
-          </div>
+          <div className="format-task-translation">{question.translation}</div>
         </React.Fragment>
       )}
     </div>
@@ -36,26 +34,32 @@ export function FormatTaskOpenBrackets(question, hasError, isCorrect) {
 
 export function FormatTaskUnderstandSpeech(question, hasError, isCorrect) {
   return (
-    <div className="course-exercise-title">
+    <div className="format-task">
       {isCorrect ? (
         <React.Fragment>
-          <div className="course-exercise-question">
+          <div className="format-task-question">
             <ButtonToVoice text={question.sentence} />
           </div>
-          <div className="course-exercise-question">
+          <div className="format-task-question">
             <span>{question.sentence}</span>
           </div>
-          <div className="course-exercise-question-translation">
+          <div className="format-task-translation">
             {question.sentenceTranslation}
           </div>
         </React.Fragment>
       ) : (
         <React.Fragment>
-          <div className="course-exercise-question">
+          <div
+            className="format-task-question"
+            style={{ display: 'flex', flexDirection: 'column' }}
+          >
             <ButtonToVoice text={question.sentence} />
+            <span className="format-task-translation">
+              (click to listen a fragment)
+            </span>
           </div>
           {hasError ? (
-            <div className="course-exercise-question-translation">
+            <div className="format-task-translation">
               {question.sentenceTranslation}
             </div>
           ) : null}
@@ -67,23 +71,21 @@ export function FormatTaskUnderstandSpeech(question, hasError, isCorrect) {
 
 export function FormatTaskFillInput(question, hasError, isCorrect) {
   return (
-    <div className="course-exercise-title">
+    <div className="format-task">
       {isCorrect ? (
         <React.Fragment>
-          <div className="course-exercise-question">
+          <div className="format-task-question">
             <span>{question.correctSentence}</span>
             <ButtonToVoice text={question.correctSentence} />
           </div>
-          <div className="course-exercise-question-translation">
+          <div className="format-task-translation">
             {question.correctSentenceTranslation}
           </div>
         </React.Fragment>
       ) : (
         <React.Fragment>
-          <div className="course-exercise-question">{question.sentence}</div>
-          <div className="course-exercise-question-translation">
-            {question.translation}
-          </div>
+          <div className="format-task-question">{question.sentence}</div>
+          <div className="format-task-translation">{question.translation}</div>
         </React.Fragment>
       )}
     </div>
@@ -98,15 +100,13 @@ export function FormatTaskChooseOption(question, hasError) {
   );
 
   return (
-    <div className="course-exercise-title">
-      <div className="course-exercise-question">
+    <div className="format-task">
+      <div className="format-task-question">
         {verbFirstPart}
         <span style={hasError ? { color: 'red' } : null}>{verbEnding}</span>
         <ButtonToVoice text={question.verb} />
       </div>
-      <div className="course-exercise-question-translation">
-        ({question.translation})
-      </div>
+      <div className="format-task-translation">({question.translation})</div>
     </div>
   );
 }
