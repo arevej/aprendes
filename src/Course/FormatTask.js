@@ -65,7 +65,7 @@ export function FormatTaskUnderstandSpeech(question, hasError, isCorrect) {
   );
 }
 
-export function FormatTaskFillBlank(question, hasError, isCorrect) {
+export function FormatTaskFillInput(question, hasError, isCorrect) {
   return (
     <div className="course-exercise-title">
       {isCorrect ? (

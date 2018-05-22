@@ -15,7 +15,7 @@
 }
 .exercise-task {
   font-family: 'Noto Sans', sans-serif;
-  width: 550px;
+  width: 600px;
   height: 400px;
   margin: 0 auto;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -75,10 +75,22 @@
   color: #bf0d0d;
 }
 
-.exercise-item-with-blank-input {
+.exercise-item-input {
   border: 1px solid #ddd;
   border-radius: 13px;
   padding: 10px 20px;
-  font-size: 20px;
-  margin-bottom: 30px;
+  font-size: 22px;
+  width: 170px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.inputs {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  font-size: 22px;
 }

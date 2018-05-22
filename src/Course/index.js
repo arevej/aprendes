@@ -9,7 +9,7 @@ import Container from '../Container';
 
 import {
   FormatTaskOpenBrackets,
-  FormatTaskFillBlank,
+  FormatTaskFillInput,
   FormatTaskUnderstandSpeech,
   FormatTaskChooseOption,
 } from './FormatTask';
@@ -79,7 +79,7 @@ const openBracketsExerciseQuestions = [
     translation: 'I (to live) ... in Spain',
     options: ['vive', 'viven', 'vivo'],
     answer: 'vivo',
-    type: 'blank',
+    type: 'input',
     format: FormatTaskOpenBrackets,
   },
   {
@@ -90,20 +90,20 @@ const openBracketsExerciseQuestions = [
     translation: 'We (to speak) ... Russian',
     options: ['hablen', 'hablamos', 'hables'],
     answer: 'hablamos',
-    type: 'blank',
+    type: 'input',
     format: FormatTaskOpenBrackets,
   },
 ];
 
-const fillInBlankExerciseQuestions = [
+const fillInInputExerciseQuestions = [
   {
-    sentence: 'Yo no vivo ... Madrid',
+    sentence: 'Yo no ... Madrid',
     correctSentence: 'Yo no vivo en Madrid',
     correctSentenceTranslation: "I don't live in Madrid",
     translation: "I don't live ... in Madrid ",
     answer: 'en',
-    type: 'blank',
-    format: FormatTaskFillBlank,
+    type: 'input',
+    format: FormatTaskFillInput,
   },
   {
     sentence: 'Ella va ... la escuela',
@@ -111,8 +111,8 @@ const fillInBlankExerciseQuestions = [
     correctSentenceTranslation: 'She goes to school',
     translation: 'She goes ... school',
     answer: 'a',
-    type: 'blank',
-    format: FormatTaskFillBlank,
+    type: 'input',
+    format: FormatTaskFillInput,
   },
 ];
 
@@ -121,7 +121,7 @@ const understandSpeechExerciseQuestions = [
     sentence: 'Yo no como manzanas',
     sentenceTranslation: "I don't eat apples",
     answer: 'yo no como manzanas',
-    type: 'blank',
+    type: 'input',
     format: FormatTaskUnderstandSpeech,
   },
   {
@@ -136,22 +136,33 @@ const understandSpeechExerciseQuestions = [
     sentence: 'Ella descansa en casa',
     sentenceTranslation: 'She rests at home',
     answer: 'ella descansa en casa',
-    type: 'blank',
+    type: 'input',
     format: FormatTaskUnderstandSpeech,
   },
   {
     sentence: 'Nosotros leemos un libro',
     sentenceTranslation: 'We read a book',
     answer: 'nosotros leemos un libro',
-    type: 'blank',
+    type: 'input',
     format: FormatTaskUnderstandSpeech,
   },
   {
     sentence: 'Ellos no beben vino',
     sentenceTranslation: "They don't drink vine",
     answer: 'ellos no beben vino',
-    type: 'blank',
+    type: 'input',
     format: FormatTaskUnderstandSpeech,
+  },
+];
+
+const fillInInputsExerciseQuestions = [
+  {
+    sentence:
+      'Yo no vivo __ Madrid. __ la mañana yo tengo __ ir en tren 40 minutos.',
+    correctSentenceTranslation:
+      "I don't live in Madrid. In the morning I need to go by train 40 minutes.",
+    answer: ['en', 'por', 'que'],
+    type: 'inputs',
   },
 ];
 
@@ -202,13 +213,13 @@ class Course extends Component {
         ),
       },
       {
-        name: 'Fill in blank',
-        slug: 'fill_in_blank',
+        name: 'Fill in input',
+        slug: 'fill_in_input',
         component: (
           <Exercise
-            questions={fillInBlankExerciseQuestions}
+            questions={fillInInputExerciseQuestions}
             task="Fill in blank with a missing preposion:"
-            onDone={() => this.handleMarkExerciseAsDone('fill_in_blank')}
+            onDone={() => this.handleMarkExerciseAsDone('fill_in_input')}
           />
         ),
       },
@@ -218,8 +229,20 @@ class Course extends Component {
         component: (
           <Exercise
             questions={understandSpeechExerciseQuestions}
-            task="Fill in blank with speech text:"
+            task="Fill in input with speech text:"
             onDone={() => this.handleMarkExerciseAsDone('understand_speech')}
+          />
+        ),
+      },
+      {
+        name: 'Fill in blanks',
+        slug: 'fill_in_blanks',
+        component: (
+          <Exercise
+            questions={fillInInputsExerciseQuestions}
+            task="Fill in blank with speech text:"
+            onDone={() => this.handleMarkExerciseAsDone('fill_in_blanks')}
+            inputs
           />
         ),
       },

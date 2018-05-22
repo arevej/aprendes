@@ -6,6 +6,20 @@ import './Exercise.css';
 
 const TIME_OUT = 1500;
 
+function compareArrays(a, b) {
+  if (a && b) {
+    if (a.length !== b.length) return false;
+
+    for (var i = 0; i < a.length; ++i) {
+      if (a[i] !== b[i]) {
+        return false;
+      }
+    }
+    return true;
+  }
+  return false;
+}
+
 function Option({ isDisabled, isActive, text, onClick }) {
   return (
     <div
@@ -44,7 +58,7 @@ function Options({ tries, question, onClick }) {
   );
 }
 
-function Blank({
+function Input({
   onSubmit,
   typedAnswer,
   onChange,
@@ -69,8 +83,8 @@ function Blank({
           type="text"
           value={typedAnswer}
           onChange={onChange}
-          autofocus="true"
-          className="exercise-item-with-blank-input"
+          autoFocus="true"
+          className="exercise-item-input"
           style={
             hasTries &&
             hasOnlyWrongTries &&
@@ -83,6 +97,92 @@ function Blank({
       </form>
     </div>
   );
+}
+
+class Inputs extends Component {
+  state = {
+    typedAnswers: [],
+    tries: [],
+  };
+
+  handleChange = (evt, idx) => {
+    const typedAnswers = this.state.typedAnswers;
+    typedAnswers[idx] = evt.target.value;
+    this.setState({ typedAnswers });
+  };
+
+  handleRightAnswers = event => {
+    event.preventDefault();
+    const { question } = this.props;
+    const answersToLowerCase = this.state.typedAnswers.map(answer =>
+      answer.toLowerCase(),
+    );
+
+    if (compareArrays(answersToLowerCase, question.answer)) {
+      this.setState({
+        tries: [...this.state.tries, answersToLowerCase],
+      });
+      setTimeout(() => this.props.onCorrectAnswer(), TIME_OUT);
+    } else {
+      this.setState({
+        tries: [...this.state.tries, answersToLowerCase],
+      });
+    }
+  };
+
+  render() {
+    const { question } = this.props;
+    const questionParts = this.props.question.sentence.split(/__/gi);
+
+    const isChosenCorrectAnswer = idx =>
+      this.state.tries.find(tries => tries[idx] === question.answer[idx]);
+
+    const lastTry = this.state.tries[this.state.tries.length - 1];
+    return (
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          flexDirection: 'column',
+        }}
+      >
+        <form
+          onSubmit={this.handleRightAnswers}
+          style={{ display: 'flex', flexDirection: 'column' }}
+        >
+          <div className="inputs">
+            {questionParts.map((part, idx) => (
+              <React.Fragment>
+                <span>{part}</span>
+                {idx !== questionParts.length - 1 ? (
+                  <input
+                    type="text"
+                    value={this.state.typedAnswers[idx] || ''}
+                    onChange={evt => this.handleChange(evt, idx)}
+                    autoFocus={idx === 0 ? true : false}
+                    className="exercise-item-input"
+                    style={
+                      isChosenCorrectAnswer(idx)
+                        ? { color: 'green' }
+                        : lastTry
+                          ? this.state.typedAnswers[idx] === lastTry[idx] &&
+                            this.state.typedAnswers[idx] !==
+                              this.props.question.answer[idx]
+                            ? { color: 'red' }
+                            : null
+                          : null
+                    }
+                  />
+                ) : null}
+              </React.Fragment>
+            ))}
+          </div>
+          <input className="button" type="submit" value="Submit" />
+        </form>
+      </div>
+    );
+  }
 }
 
 class ExerciseItem extends Component {
@@ -145,9 +245,9 @@ class ExerciseItem extends Component {
                   onClick={this.chooseOption}
                 />
               );
-            case 'blank':
+            case 'input':
               return (
-                <Blank
+                <Input
                   onSubmit={this.handleRightAnswer}
                   typedAnswer={this.state.typedAnswer}
                   onChange={this.handleChange}
@@ -210,13 +310,22 @@ class Exercise extends Component {
       </div>
     ) : (
       <div className="exercise">
-        <ExerciseItem
-          key={this.state.currentQuestionIndex}
-          question={question}
-          formatTaskDescription={question.format}
-          isLastQuestion={this.isLastQuestion()}
-          onCorrectAnswer={this.handleExerciseDone}
-        />
+        {this.props.inputs ? (
+          <Inputs
+            key={this.state.currentQuestionIndex}
+            question={question}
+            isLastQuestion={this.isLastQuestion()}
+            onCorrectAnswer={this.handleExerciseDone}
+          />
+        ) : (
+          <ExerciseItem
+            key={this.state.currentQuestionIndex}
+            question={question}
+            formatTaskDescription={question.format}
+            isLastQuestion={this.isLastQuestion()}
+            onCorrectAnswer={this.handleExerciseDone}
+          />
+        )}
         <div className="exercise-progress">
           {this.state.currentQuestionIndex + 1} / {this.props.questions.length}
         </div>
