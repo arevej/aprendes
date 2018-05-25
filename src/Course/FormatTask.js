@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 
 import { ButtonToVoice } from '../Buttons';
-import './CourseExercise.css';
+import './FormatTask.css';
 
-export function FormatTaskOpenBrackets(question, hasError, isCorrect) {
+export function FormatTaskOpenBrackets({ question, hasError, isCorrect }) {
   return (
     <div className="format-task">
       {isCorrect ? (
@@ -32,7 +32,7 @@ export function FormatTaskOpenBrackets(question, hasError, isCorrect) {
   );
 }
 
-export function FormatTaskUnderstandSpeech(question, hasError, isCorrect) {
+export function FormatTaskUnderstandSpeech({ question, hasError, isCorrect }) {
   return (
     <div className="format-task">
       {isCorrect ? (
@@ -69,7 +69,7 @@ export function FormatTaskUnderstandSpeech(question, hasError, isCorrect) {
   );
 }
 
-export function FormatTaskFillInput(question, hasError, isCorrect) {
+export function FormatTaskFillInput({ question, hasError, isCorrect }) {
   return (
     <div className="format-task">
       {isCorrect ? (
@@ -92,7 +92,7 @@ export function FormatTaskFillInput(question, hasError, isCorrect) {
   );
 }
 
-export function FormatTaskChooseOption(question, hasError) {
+export function FormatTaskChooseOption({ question, hasError }) {
   const verbFirstPart = question.verb.slice(0, question.verb.length - 2);
   const verbEnding = question.verb.slice(
     question.verb.length - 2,

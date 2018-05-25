@@ -71,6 +71,9 @@ function Input({
   hasOnlyWrongTries,
   isChosenCorrectAnswer,
 }) {
+  const lastTry = tries[tries.length - 1];
+  const doesMatchLastTry = typedAnswer === lastTry;
+  const hasErroneousInput = hasTries && hasOnlyWrongTries && doesMatchLastTry;
   return (
     <div style={displayStyle}>
       <form
@@ -84,9 +87,7 @@ function Input({
           autoFocus="true"
           className="exercise-item-input"
           style={
-            hasTries &&
-            hasOnlyWrongTries &&
-            typedAnswer === tries[tries.length - 1]
+            hasErroneousInput
               ? { color: 'red' }
               : isChosenCorrectAnswer ? { color: 'green' } : null
           }
@@ -102,7 +103,7 @@ function Input({
 class Inputs extends Component {
   state = {
     typedAnswers: [],
-    tries: [],
+    lastTry: null,
   };
 
   handleChange = (evt, idx) => {
@@ -113,31 +114,32 @@ class Inputs extends Component {
 
   handleRightAnswers = event => {
     event.preventDefault();
+
     const { question } = this.props;
     const answersToLowerCase = this.state.typedAnswers.map(answer =>
       answer.toLowerCase(),
     );
 
+    this.setState({
+      lastTry: answersToLowerCase,
+    });
     if (compareArrays(answersToLowerCase, question.answer)) {
-      this.setState({
-        tries: [...this.state.tries, answersToLowerCase],
-      });
       setTimeout(() => this.props.onCorrectAnswer(), TIME_OUT);
-    } else {
-      this.setState({
-        tries: [...this.state.tries, answersToLowerCase],
-      });
     }
   };
 
   render() {
     const { question } = this.props;
-    const questionParts = this.props.question.sentence.split(/__/gi);
+    const questionParts = question.sentence.split(/__/gi);
 
-    const isChosenCorrectAnswer = idx =>
-      this.state.tries.find(tries => tries[idx] === question.answer[idx]);
+    const { lastTry, typedAnswers } = this.state;
+    const isChosenCorrectAnswer = idx => lastTry === question.answer[idx];
+    const hasErroneousInput = idx =>
+      lastTry
+        ? typedAnswers[idx] === lastTry[idx] &&
+          typedAnswers[idx] !== question.answer[idx]
+        : false;
 
-    const lastTry = this.state.tries[this.state.tries.length - 1];
     return (
       <ExerciseItemContainer>
         <div style={displayStyle}>
@@ -159,13 +161,7 @@ class Inputs extends Component {
                       style={
                         isChosenCorrectAnswer(idx)
                           ? { color: 'green' }
-                          : lastTry
-                            ? this.state.typedAnswers[idx] === lastTry[idx] &&
-                              this.state.typedAnswers[idx] !==
-                                this.props.question.answer[idx]
-                              ? { color: 'red' }
-                              : null
-                            : null
+                          : hasErroneousInput(idx) ? { color: 'red' } : null
                       }
                     />
                   ) : null}
@@ -190,25 +186,21 @@ class ExerciseItem extends Component {
 
   handleRightAnswer = event => {
     event.preventDefault();
+
     const { typedAnswer } = this.state;
+    this.setState({
+      tries: [...this.state.tries, typedAnswer.toLowerCase()],
+    });
+
     if (this.props.question.answer === typedAnswer.toLowerCase()) {
-      this.setState({
-        tries: [...this.state.tries, typedAnswer.toLowerCase()],
-      });
       setTimeout(() => this.props.onCorrectAnswer(), TIME_OUT);
-    } else {
-      this.setState({
-        tries: [...this.state.tries, typedAnswer.toLowerCase()],
-      });
     }
   };
 
   chooseOption = chosenAnswer => () => {
+    this.setState({ tries: [...this.state.tries, chosenAnswer] });
     if (this.props.question.answer === chosenAnswer) {
-      this.setState({ tries: [...this.state.tries, chosenAnswer] });
       setTimeout(() => this.props.onCorrectAnswer(), TIME_OUT);
-    } else {
-      this.setState({ tries: [...this.state.tries, chosenAnswer] });
     }
   };
 
@@ -217,21 +209,20 @@ class ExerciseItem extends Component {
   };
 
   render() {
-    const { question } = this.props;
+    const { question, FormatTaskDescription } = this.props;
     const hasTries = this.state.tries.length > 0;
     const hasOnlyWrongTries = this.state.tries.indexOf(question.answer) === -1;
-    const isChosenCorrectAnswer =
-      this.state.tries[this.state.tries.length - 1] ===
-      this.props.question.answer;
+    const lastTry = this.state.tries[this.state.tries.length - 1];
+    const isChosenCorrectAnswer = lastTry === this.props.question.answer;
     return (
       <ExerciseItemContainer>
         <div>
           <div>
-            {this.props.formatTaskDescription(
-              question,
-              hasTries && hasOnlyWrongTries,
-              isChosenCorrectAnswer,
-            )}
+            <FormatTaskDescription
+              question={question}
+              hasError={hasTries && hasOnlyWrongTries}
+              isCorrect={isChosenCorrectAnswer}
+            />
           </div>
           {(() => {
             switch (question.type) {
@@ -309,7 +300,7 @@ class Exercise extends Component {
       </div>
     ) : (
       <div className="exercise">
-        {this.props.inputs ? (
+        {question.type === 'inputs' ? (
           <Inputs
             key={this.state.currentQuestionIndex}
             question={question}
@@ -320,7 +311,7 @@ class Exercise extends Component {
           <ExerciseItem
             key={this.state.currentQuestionIndex}
             question={question}
-            formatTaskDescription={question.format}
+            FormatTaskDescription={question.format}
             isLastQuestion={this.isLastQuestion()}
             onCorrectAnswer={this.handleExerciseDone}
           />
