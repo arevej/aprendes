@@ -120,7 +120,11 @@ class Inputs extends Component {
     const questionParts = question.sentence.split(/__/gi);
 
     const { lastTry, typedAnswers } = this.state;
-    const isChosenCorrectAnswer = idx => lastTry === question.answer[idx];
+    const isChosenCorrectAnswer = idx => {
+      if (lastTry !== null) {
+        return lastTry[idx] === question.answer[idx];
+      }
+    };
     const hasErroneousInput = idx =>
       lastTry
         ? typedAnswers[idx] === lastTry[idx] &&
