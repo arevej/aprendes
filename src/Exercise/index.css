@@ -7,6 +7,7 @@
   margin: 0 auto;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   border-radius: 30px;
+  padding: 15px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -19,6 +20,7 @@
   width: 600px;
   height: 400px;
   margin: 0 auto;
+  padding: 15px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   border-radius: 30px;
   display: flex;
@@ -44,64 +46,4 @@
   bottom: 0;
   margin-bottom: 13px;
   color: #bf0d0d;
-}
-
-
-
-
-.exercise-item-container {
-  padding: 20px;
-}
-
-.option {
-  border: 1px solid #FFE3E3;
-  border-radius: 20px;
-  background: #bf0d0d;
-  font-size: 20px;
-  padding: 10px 70px;
-  color: #fff;
-  width: 100px;
-  margin-bottom: 10px;
-  text-align: center;
-  transition: 0.2s all;
-  cursor: pointer;
-}
-
-.option:last-of-type {
-  margin-bottom: 0;
-}
-
-.option:hover {
-  background: #F46060;
-}
-
-.option--disabled, .option--disabled:hover {
-  background-color: pink;
-}
-
-.option--active, .option--active:hover {
-  background-color: green;
-}
-
-
-.exercise-item-input {
-  border: 1px solid #ddd;
-  border-radius: 13px;
-  padding: 10px 20px;
-  font-size: 22px;
-  width: 170px;
-  margin-left: 10px;
-  margin-right: 10px;
-  margin-bottom: 15px;
-}
-
-.inputs {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  font-size: 22px;
-  margin-bottom: 20px;
 }

@@ -1,0 +1,10 @@
+.exercise-item-input {
+  border: 1px solid #ddd;
+  border-radius: 13px;
+  padding: 10px 20px;
+  font-size: 22px;
+  width: 170px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 15px;
+}
