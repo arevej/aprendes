@@ -85,7 +85,9 @@ export function FormatTaskFillInput({ question, hasError, isCorrect }) {
       ) : (
         <React.Fragment>
           <div className="format-task-question">{question.sentence}</div>
-          <div className="format-task-translation">{question.translation}</div>
+          <div className="format-task-translation">
+            {question.correctSentenceTranslation}
+          </div>
         </React.Fragment>
       )}
     </div>

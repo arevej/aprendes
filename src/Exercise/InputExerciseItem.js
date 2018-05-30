@@ -23,7 +23,11 @@ function Input({
     <div>
       <form
         onSubmit={onSubmit}
-        style={{ display: 'flex', flexDirection: 'column' }}
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+        }}
       >
         <input
           type="text"

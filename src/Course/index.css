@@ -4,14 +4,6 @@
   justify-content: center;
 }
 
-.switch-wrapper {
-  position: relative;
-}
-
-.switch-wrapper > div {
-  position: absolute;
-}
-
 .topic-list {
   display: flex;
   flex-direction: column;

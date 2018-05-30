@@ -44,7 +44,7 @@ const chooseTaskFormatter = type => {
 
 class Course extends Component {
   state = {
-    begginerProgress: 43,
+    begginerProgress: 0,
     intermediateProgress: 0,
     advancedProgress: 0,
     topics: topics,
@@ -54,6 +54,8 @@ class Course extends Component {
   handleMarkExerciseAsDone = slug => {
     this.setState({
       doneExercises: [...this.state.doneExercises, { slug: slug }],
+      begginerProgress:
+        this.state.begginerProgress + 100 / this.state.topics.length,
     });
   };
 
