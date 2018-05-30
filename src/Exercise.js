@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Button from './Buttons';
 import { Redirect } from 'react-router';
+import { compareArrays } from './utility';
 
 import './Exercise.css';
 
@@ -14,20 +15,6 @@ const displayStyle = {
 
 function ExerciseItemContainer({ children }) {
   return <div className="exercise-item-container">{children}</div>;
-}
-
-function compareArrays(a, b) {
-  if (a && b) {
-    if (a.length !== b.length) return false;
-
-    for (var i = 0; i < a.length; ++i) {
-      if (a[i] !== b[i]) {
-        return false;
-      }
-    }
-    return true;
-  }
-  return false;
 }
 
 function Option({ isDisabled, isActive, text, onClick }) {
