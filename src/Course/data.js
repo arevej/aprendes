@@ -142,7 +142,7 @@ const fillInInputsExerciseQuestions = [
     type: 'inputs',
   },
   {
-    sentence: 'Yo no ... Madrid',
+    sentence: 'Yo no vivo ... Madrid',
     correctSentence: 'Yo no vivo en Madrid',
     correctSentenceTranslation: "I don't live in Madrid",
     translation: "I don't live ... in Madrid ",

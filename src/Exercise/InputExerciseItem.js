@@ -15,6 +15,7 @@ function Input({
   hasTries,
   hasOnlyWrongTries,
   isChosenCorrectAnswer,
+  long,
 }) {
   const lastTry = tries[tries.length - 1];
   const doesMatchLastTry = typedAnswer === lastTry;
@@ -35,11 +36,12 @@ function Input({
           onChange={onChange}
           autoFocus="true"
           className="exercise-item-input"
-          style={
-            hasErroneousInput
+          style={{
+            ...(long ? { width: 300 } : { width: 200 }),
+            ...(hasErroneousInput
               ? { color: 'red' }
-              : isChosenCorrectAnswer ? { color: 'green' } : null
-          }
+              : isChosenCorrectAnswer ? { color: 'green' } : null),
+          }}
         />
         <div style={{ textAlign: 'center', marginTop: 10 }}>
           <input className="button" type="submit" value="Submit" />
@@ -79,6 +81,7 @@ class InputExerciseItem extends Component {
     const hasOnlyWrongTries = tries.indexOf(question.answer) === -1;
     const lastTry = tries[tries.length - 1];
     const isChosenCorrectAnswer = lastTry === question.answer;
+    const isLong = question.answer.length > 15;
     return (
       <div>
         <div>
@@ -96,6 +99,7 @@ class InputExerciseItem extends Component {
           hasTries={hasTries}
           hasOnlyWrongTries={hasOnlyWrongTries}
           isChosenCorrectAnswer={isChosenCorrectAnswer}
+          long={isLong}
         />
       </div>
     );

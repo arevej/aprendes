@@ -35,6 +35,10 @@ a {
   border-radius: 22px;
 }
 
+.main {
+  margin-bottom: 50px;
+}
+
 .main-description {
   display: flex;
   flex-direction: column;
