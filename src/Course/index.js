@@ -54,8 +54,9 @@ class Course extends Component {
   handleMarkExerciseAsDone = slug => {
     this.setState({
       doneExercises: [...this.state.doneExercises, { slug: slug }],
-      begginerProgress:
+      begginerProgress: Math.round(
         this.state.begginerProgress + 100 / this.state.topics.length,
+      ),
     });
   };
 

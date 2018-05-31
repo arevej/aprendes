@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Option from './Option';
 import Button from '../Buttons';
 import { Redirect } from 'react-router';
 import { compareArrays } from '../utility';
@@ -6,21 +7,6 @@ import { compareArrays } from '../utility';
 import './OptionsExerciseItem.css';
 
 const TIME_OUT = 1500;
-
-function Option({ isDisabled, isActive, text, onClick }) {
-  return (
-    <div
-      className={
-        'option' +
-        (isDisabled ? ' option--disabled' : '') +
-        (isActive ? ' option--active' : '')
-      }
-      onClick={onClick}
-    >
-      {text}
-    </div>
-  );
-}
 
 function Options({ tries, question, onClick }) {
   const wasPressed = option => tries.indexOf(option) !== -1;

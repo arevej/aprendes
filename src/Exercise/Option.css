@@ -1,0 +1,28 @@
+.option {
+  border: 1px solid #FFE3E3;
+  border-radius: 20px;
+  background: #bf0d0d;
+  font-size: 20px;
+  padding: 12px 0;
+  color: #fff;
+  min-width: 230px;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+  text-align: center;
+  transition: 0.2s all;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.option:hover {
+  background: #F46060;
+}
+
+.option--disabled, .option--disabled:hover {
+  background-color: pink;
+}
+
+.option--active, .option--active:hover {
+  background-color: green;
+}
