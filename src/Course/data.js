@@ -152,6 +152,17 @@ const fillInInputsExerciseQuestions = [
   },
 ];
 
+const matchPairsExerciseQuestions = [
+  {
+    task: [
+      ['un gato', 'a cat'],
+      ['una manzana', 'an apple'],
+      ['una cuchara', 'a spoon'],
+    ],
+    type: 'pairs',
+  },
+];
+
 export const topics = [
   {
     name: 'Choose an option',
@@ -182,5 +193,11 @@ export const topics = [
     slug: 'fill_in_blanks',
     questions: fillInInputsExerciseQuestions,
     task: 'Fill in blank with speech text:',
+  },
+  {
+    name: 'Match pairs',
+    slug: 'match_pairs',
+    questions: matchPairsExerciseQuestions,
+    task: 'Match pairs:',
   },
 ];

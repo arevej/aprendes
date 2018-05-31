@@ -6,6 +6,7 @@ import { compareArrays } from '../utility';
 import InputExerciseItem from './InputExerciseItem';
 import InputsExerciseItem from './InputsExerciseItem';
 import OptionsExerciseItem from './OptionsExerciseItem';
+import MatchPairsExerciseItem from './MatchPairsExerciseItem';
 
 import './index.css';
 
@@ -80,6 +81,15 @@ class Exercise extends Component {
                   key={this.state.currentQuestionIndex}
                   question={question}
                   FormatTaskDescription={question.format}
+                  isLastQuestion={this.isLastQuestion()}
+                  onCorrectAnswer={this.handleExerciseDone}
+                />
+              );
+            case 'pairs':
+              return (
+                <MatchPairsExerciseItem
+                  key={this.state.currentQuestionIndex}
+                  question={question}
                   isLastQuestion={this.isLastQuestion()}
                   onCorrectAnswer={this.handleExerciseDone}
                 />

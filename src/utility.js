@@ -13,3 +13,23 @@ export function compareArrays(a, b) {
   }
   return false;
 }
+
+export function flatten(array) {
+  return array.reduce((acc, arr) => {
+    return [...acc, ...arr];
+  }, []);
+}
+
+export function shuffle(array) {
+  let m = array.length;
+  let t;
+  let i;
+
+  while (m) {
+    i = Math.floor(Math.random() * m--);
+    t = array[m];
+    array[m] = array[i];
+    array[i] = t;
+  }
+  return array;
+}
