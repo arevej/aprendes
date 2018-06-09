@@ -163,6 +163,14 @@ const matchPairsExerciseQuestions = [
   },
 ];
 
+const listenYourselfExerciseQuestions = [
+  {
+    text:
+      'Yo no vivo en Madrid. Por la mañana yo tengo que ir en tren 40 minutos.',
+    type: 'listen_yourself',
+  },
+];
+
 export const topics = [
   {
     name: 'Choose an option',
@@ -199,5 +207,11 @@ export const topics = [
     slug: 'match_pairs',
     questions: matchPairsExerciseQuestions,
     task: 'Match pairs:',
+  },
+  {
+    name: 'Listen yourself',
+    slug: 'listen_yourself',
+    questions: listenYourselfExerciseQuestions,
+    task: 'Listen, read recording yourself and listen yourself:',
   },
 ];

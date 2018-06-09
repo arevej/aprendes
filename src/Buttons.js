@@ -26,4 +26,23 @@ export function ButtonToVoice({ text }) {
   );
 }
 
+export function RoundButton({ record, stop, play, active, onClick }) {
+  return (
+    <div
+      className={active ? 'round-button--active' : 'round-button'}
+      onClick={onClick}
+    >
+      {(() => {
+        if (record) {
+          return <Icons.TiMediaRecord size={30} />;
+        } else if (stop) {
+          return <Icons.TiMediaStop size={30} />;
+        } else if (play) {
+          return <Icons.TiMediaPlay size={30} />;
+        }
+      })()}
+    </div>
+  );
+}
+
 export default Button;

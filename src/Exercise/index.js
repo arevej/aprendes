@@ -7,6 +7,7 @@ import InputExerciseItem from './InputExerciseItem';
 import InputsExerciseItem from './InputsExerciseItem';
 import OptionsExerciseItem from './OptionsExerciseItem';
 import MatchPairsExerciseItem from './MatchPairsExerciseItem';
+import ListenYourselfExerciseItem from './ListenYourselfExerciseItem';
 
 import './index.css';
 
@@ -88,6 +89,15 @@ class Exercise extends Component {
             case 'pairs':
               return (
                 <MatchPairsExerciseItem
+                  key={this.state.currentQuestionIndex}
+                  question={question}
+                  isLastQuestion={this.isLastQuestion()}
+                  onCorrectAnswer={this.handleExerciseDone}
+                />
+              );
+            case 'listen_yourself':
+              return (
+                <ListenYourselfExerciseItem
                   key={this.state.currentQuestionIndex}
                   question={question}
                   isLastQuestion={this.isLastQuestion()}

@@ -1,0 +1,20 @@
+.listen-yourself {
+  display: flex;
+  flex-direction: column;
+
+}
+
+.listen-yourself-text {
+  font-size: 22px;
+  text-align: center;
+  margin: 0 20px;
+
+}
+
+.listen-yourself-task {
+  font-size: 18px;
+  color: #aaa;
+  margin: 20px 0;
+  text-align: center;
+
+}

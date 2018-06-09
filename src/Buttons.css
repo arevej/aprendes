@@ -16,14 +16,13 @@
 }
 
 .button-to-voice {
-  color: #bf0d0d;
+  color: #F46060;
   transition: 0.3s all;
-  margin-left: 5px;
   cursor: pointer;
 }
 
 .button-to-voice:hover {
-  color: #F46060;
+  color: #bf0d0d;
 }
 
 .button--round {
@@ -42,4 +41,32 @@
 
 .button--round:hover {
   background: #3a164b;
+}
+
+.round-button {
+  border: 1px solid #FFE3E3;
+  border-radius: 15px;
+  background: #F46060;
+  text-decoration: none;
+  padding: 5px;
+  color: #fff;
+  text-align: center;
+  transition: 0.2s all;
+  cursor: pointer;
+}
+
+.round-button--active {
+  border: 1px solid #FFE3E3;
+  border-radius: 15px;
+  background: #bf0d0d;
+  text-decoration: none;
+  padding: 5px;
+  color: #fff;
+  text-align: center;
+  transition: 0.2s all;
+  cursor: pointer;
+}
+
+.round-button:hover {
+  background: #bf0d0d;
 }
