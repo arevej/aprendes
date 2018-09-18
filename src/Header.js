@@ -4,12 +4,13 @@ import './Header.css';
 
 import logo from './img/logo.png';
 
-function Header() {
+function Header({ children }) {
   return (
     <div className="header">
       <Link to="/">
         <img src={logo} height="40px" alt="" />
       </Link>
+      {children}
     </div>
   );
 }

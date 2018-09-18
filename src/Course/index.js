@@ -5,6 +5,7 @@ import { AnimatedSwitch } from 'react-router-transition';
 import Exercise from './../Exercise';
 import Header from '../Header';
 import ProgressBar from '../components/ProgressBar';
+import Dictionary from './Dictionary';
 
 import {
   FormatTaskOpenBrackets,
@@ -49,6 +50,7 @@ class Course extends Component {
     advancedProgress: 0,
     topics: topics,
     doneExercises: [],
+    isDictionaryOpen: false,
   };
 
   handleMarkExerciseAsDone = slug => {
@@ -58,6 +60,10 @@ class Course extends Component {
         this.state.begginerProgress + 100 / this.state.topics.length,
       ),
     });
+  };
+
+  handleOpenAndCloseDictionary = () => {
+    this.setState({ isDictionaryOpen: !this.state.isDictionaryOpen });
   };
 
   render() {
@@ -88,7 +94,14 @@ class Course extends Component {
     return (
       <React.Fragment>
         <Container>
-          <Header />
+          <Header>
+            <div
+              className="course-dictionary-button"
+              onClick={this.handleOpenAndCloseDictionary}
+            >
+              Your dictionary
+            </div>
+          </Header>
 
           <Route
             path={match.url}
@@ -127,6 +140,7 @@ class Course extends Component {
 
           <Route path={`${match.url}/:slug`} render={ExerciseComponent} />
         </Container>
+        <Dictionary isDictionaryOpen={this.state.isDictionaryOpen} />
       </React.Fragment>
     );
   }
