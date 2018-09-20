@@ -11,3 +11,67 @@
   background: #fff;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
+
+.dictionary-list {
+  padding: 18px;
+}
+
+.dictionary-item {
+  border: 1px solid #aaa;
+  border-radius: 7px;
+  margin-bottom: 9px;
+  padding: 2px 3px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.dictionary-item:hover {
+  box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.1), 0 4px 12px 0 rgba(0, 0, 0, 0.1);
+}
+
+.dictionary textarea {
+  border: none;
+  padding: 2px 8px;
+  border-right: 1px solid #aaa;
+  font-size: 18px;
+  letter-spacing: 1px;
+  width: 150px;
+  resize: none;
+}
+
+.dictionary-list-item > textarea:last-of-type, textarea:last-of-type {
+  border: none;
+  flex:1;
+}
+
+.dictionary-item-word {
+  color: rgba(122, 0, 24, 0.9);
+}
+
+.dictionary-item-translation {
+  color: #000;
+}
+
+.new-dictionary-item {
+  padding-left: 32px;
+  margin-bottom: 7px;
+}
+
+
+textarea:hover,
+input:hover,
+textarea:active,
+input:active,
+textarea:focus,
+input:focus,
+button:focus,
+button:active,
+button:hover,
+label:focus,
+.btn:active,
+.btn.active
+{
+    outline:0px !important;
+    -webkit-appearance:none;
+}

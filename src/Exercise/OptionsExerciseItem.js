@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
 import Option from './Option';
-import Button from '../Buttons';
-import { Redirect } from 'react-router';
-import { compareArrays } from '../utility';
 
 import './OptionsExerciseItem.css';
 

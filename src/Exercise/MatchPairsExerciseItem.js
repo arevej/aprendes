@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import Button from '../Buttons';
 import Option from './Option';
-import { Redirect } from 'react-router';
 import { flatten, shuffle } from '../utility';
 
 import './MatchPairsExerciseItem.css';

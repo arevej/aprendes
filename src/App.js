@@ -12,16 +12,6 @@ import voc from './img/voc.png';
 
 import './App.css';
 
-import { getInfinitive } from './dictionary';
-
-getInfinitive('aprendes').then(infinitives => {
-  if (infinitives.length) {
-    console.log('found infinitives:', infinitives);
-  } else {
-    console.log('sad face :(');
-  }
-});
-
 function Container({ children }) {
   return <div className="container">{children}</div>;
 }

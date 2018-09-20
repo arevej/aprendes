@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Route, Link } from 'react-router-dom';
-import { AnimatedSwitch } from 'react-router-transition';
 
 import Exercise from './../Exercise';
 import Header from '../Header';

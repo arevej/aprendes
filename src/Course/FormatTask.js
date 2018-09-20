@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 import { ButtonToVoice } from '../Buttons';
 import './FormatTask.css';
@@ -10,7 +10,7 @@ export function FormatTaskOpenBrackets({ question, hasError, isCorrect }) {
         <React.Fragment>
           <div className="format-task-question">
             <span>{question.correctSentence}</span>
-            <ButtonToVoice text={question.correctSentence} />
+            <ButtonToVoice text={question.correctSentence} size={36} />
           </div>
           <div className="format-task-translation">
             {question.correctSentenceTranslation}
@@ -38,7 +38,7 @@ export function FormatTaskUnderstandSpeech({ question, hasError, isCorrect }) {
       {isCorrect ? (
         <React.Fragment>
           <div className="format-task-question">
-            <ButtonToVoice text={question.sentence} />
+            <ButtonToVoice text={question.sentence} size={36} />
           </div>
           <div className="format-task-question">
             <span>{question.sentence}</span>
@@ -53,7 +53,7 @@ export function FormatTaskUnderstandSpeech({ question, hasError, isCorrect }) {
             className="format-task-question"
             style={{ display: 'flex', flexDirection: 'column' }}
           >
-            <ButtonToVoice text={question.sentence} />
+            <ButtonToVoice text={question.sentence} size={36} />
             <span className="format-task-translation">
               (click to listen a fragment)
             </span>
@@ -76,7 +76,7 @@ export function FormatTaskFillInput({ question, hasError, isCorrect }) {
         <React.Fragment>
           <div className="format-task-question">
             <span>{question.correctSentence}</span>
-            <ButtonToVoice text={question.correctSentence} />
+            <ButtonToVoice text={question.correctSentence} size={36} />
           </div>
           <div className="format-task-translation">
             {question.correctSentenceTranslation}
@@ -106,7 +106,7 @@ export function FormatTaskChooseOption({ question, hasError }) {
       <div className="format-task-question">
         {verbFirstPart}
         <span style={hasError ? { color: 'red' } : null}>{verbEnding}</span>
-        <ButtonToVoice text={question.verb} />
+        <ButtonToVoice text={question.verb} size={36} />
       </div>
       <div className="format-task-translation">({question.translation})</div>
     </div>

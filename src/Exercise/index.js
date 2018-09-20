@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Button from '../Buttons';
 import { Redirect } from 'react-router';
-import { compareArrays } from '../utility';
 
 import InputExerciseItem from './InputExerciseItem';
 import InputsExerciseItem from './InputsExerciseItem';

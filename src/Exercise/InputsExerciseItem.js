@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import Button from '../Buttons';
-import { Redirect } from 'react-router';
 import { compareArrays } from '../utility';
 
 import './InputsExerciseItem.css';
@@ -71,7 +69,9 @@ class InputsExerciseItem extends Component {
                     style={
                       isChosenCorrectAnswer(idx)
                         ? { color: 'green' }
-                        : hasErroneousInput(idx) ? { color: 'red' } : null
+                        : hasErroneousInput(idx)
+                          ? { color: 'red' }
+                          : null
                     }
                   />
                 ) : null}

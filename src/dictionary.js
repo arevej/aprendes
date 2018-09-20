@@ -21,3 +21,21 @@ export function getInfinitive(word) {
       return verbEntry.inflectionOf.map(inf => inf.text);
     });
 }
+
+export function getTranslation(word) {
+  const url = BASE_URL + '/entries/es/' + word + '/translations=en';
+  return fetch(url, {
+    headers: {
+      app_id: APP_ID,
+      app_key: APP_KEY,
+    },
+  })
+    .then(x => x.json())
+    .then(data => {
+      return data.results[0].lexicalEntries[0].entries[0].senses.find(function(
+        item,
+      ) {
+        return item.translations != null;
+      }).translations[0].text;
+    });
+}

@@ -3,7 +3,7 @@ import * as Icons from 'react-icons/lib/ti';
 
 import './Buttons.css';
 
-function Button({ title, onClick, round }) {
+export function Button({ title, onClick, round }) {
   return (
     <div className={round ? 'button--round' : 'button'} onClick={onClick}>
       {title}
@@ -11,7 +11,7 @@ function Button({ title, onClick, round }) {
   );
 }
 
-export function ButtonToVoice({ text }) {
+export function ButtonToVoice({ text, size }) {
   const textToVoice = new SpeechSynthesisUtterance();
   textToVoice.text = text;
   textToVoice.lang = 'es-MX';
@@ -19,7 +19,7 @@ export function ButtonToVoice({ text }) {
   textToVoice.pitch = 0.2;
   return (
     <Icons.TiVolumeUp
-      size={36}
+      size={size}
       className="button-to-voice"
       onClick={() => window.speechSynthesis.speak(textToVoice)}
     />

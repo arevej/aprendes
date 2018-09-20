@@ -1,5 +1,3 @@
-import React from 'react';
-
 export function compareArrays(a, b) {
   if (a && b) {
     if (a.length !== b.length) return false;

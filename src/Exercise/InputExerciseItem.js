@@ -1,7 +1,4 @@
 import React, { Component } from 'react';
-import Button from '../Buttons';
-import { Redirect } from 'react-router';
-import { compareArrays } from '../utility';
 
 import './InputExerciseItem.css';
 
@@ -40,7 +37,9 @@ function Input({
             ...(long ? { width: 300 } : { width: 200 }),
             ...(hasErroneousInput
               ? { color: 'red' }
-              : isChosenCorrectAnswer ? { color: 'green' } : null),
+              : isChosenCorrectAnswer
+                ? { color: 'green' }
+                : null),
           }}
         />
         <div style={{ textAlign: 'center', marginTop: 10 }}>

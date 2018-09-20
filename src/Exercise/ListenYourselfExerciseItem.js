@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
 import Button, { ButtonToVoice, RoundButton } from '../Buttons';
-import { Redirect } from 'react-router';
 import MediaRecorder from 'audio-recorder-polyfill'; // to make MediaRecorder available in Safari
 
 import './ListenYourselfExerciseItem.css';
-
-const TIME_OUT = 1500;
 
 function Task({ text }) {
   return <span className="listen-yourself-task">{text}</span>;
