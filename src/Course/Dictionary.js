@@ -135,7 +135,7 @@ class Dictionary extends Component {
       <div
         className="dictionary"
         style={{
-          marginRight: this.props.isDictionaryOpen ? -DICTIONARY_WIDTH : 0,
+          marginRight: this.props.isDictionaryOpen ? 0 : -DICTIONARY_WIDTH,
           width: DICTIONARY_WIDTH,
         }}
       >
