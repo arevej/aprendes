@@ -1,9 +1,11 @@
 .dictionary {
   position: fixed;
   right: 0;
+  top: 0;
+  bottom: 0;
   margin-top: 70px;
-  z-index: 20;
-  min-height: 90vh;
+  margin-bottom: 10px;
+  height: 90vh;
   transition: all 0.5s;
   border-left: 1px solid #aaa;
   border-top-left-radius: 7px;
@@ -13,14 +15,20 @@
 }
 
 .dictionary-list {
-  padding: 18px;
+  position: absolute;
+  top: 0; bottom: 0; left: 0; right: 0;
+  overflow: auto;
+  scroll-behavior: smooth;
+  margin-top: 125px;
+  padding: 0 18px;
+  padding-bottom: 9px;
 }
 
 .dictionary-item {
   border: 1px solid #aaa;
   border-radius: 7px;
-  margin-bottom: 9px;
-  padding: 2px 3px;
+  margin-bottom: 10px;
+  padding: 3.5px 8px;
   display: flex;
   flex-direction: row;
   align-items: center;

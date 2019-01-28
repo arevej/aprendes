@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import './Dictionary.css';
+import './index.css';
 
 import { ButtonToVoice, Button } from '../Buttons';
-import { getInfinitive } from '../dictionary';
 
 const DICTIONARY_WIDTH = 430;
 let id = 1;
@@ -16,7 +15,7 @@ function DictionaryItem({
 }) {
   return (
     <div className="dictionary-item">
-      <ButtonToVoice text={word} size={28} />
+      <ButtonToVoice text={word} size={23} />
       <textarea
         type="text"
         className="dictionary-item-word"
@@ -38,6 +37,7 @@ function DictionaryItem({
 function NewDictionaryItemForm({
   word,
   translation,
+  innerRef,
   onChangeWord,
   onChangeTranslation,
   onSubmit,
@@ -46,7 +46,12 @@ function NewDictionaryItemForm({
   translationPlaceHolder,
 }) {
   return (
-    <form onKeyDown={onSubmit} className="new-dictionary-item">
+    <form
+      onKeyDown={evt =>
+        evt.keyCode === 13 && evt.shiftKey === false ? onSubmit(evt) : null
+      }
+      className="new-dictionary-item"
+    >
       <textarea
         type="text"
         className="dictionary-item-word"
@@ -54,6 +59,7 @@ function NewDictionaryItemForm({
         placeholder={wordPlaceHolder}
         rows={1}
         onChange={onChangeWord}
+        ref={innerRef}
       />
       <textarea
         type="text"
@@ -74,10 +80,28 @@ class Dictionary extends Component {
       { id: id++, word: 'manzana', translation: 'apple' },
       { id: id++, word: 'casa', translation: 'house' },
       { id: id++, word: 'madrugada', translation: 'early morning' },
+      { id: id++, word: 'gato', translation: 'cat' },
+      { id: id++, word: 'manzana', translation: 'apple' },
+      { id: id++, word: 'casa', translation: 'house' },
+      { id: id++, word: 'madrugada', translation: 'early morning' },
+      { id: id++, word: 'gato', translation: 'cat' },
+      { id: id++, word: 'manzana', translation: 'apple' },
+      { id: id++, word: 'casa', translation: 'house' },
+      { id: id++, word: 'madrugada', translation: 'early morning' },
+      { id: id++, word: 'gato', translation: 'cat' },
+      { id: id++, word: 'manzana', translation: 'apple' },
+      { id: id++, word: 'casa', translation: 'house' },
+      { id: id++, word: 'madrugada', translation: 'early morning' },
     ],
     newWord: '',
     newTranslation: '',
   };
+
+  inputs = {};
+
+  componentDidCatch() {
+    alert('J')
+  }
 
   handleChange = (id, evt, type) => {
     if (type === 'word') {
@@ -108,13 +132,8 @@ class Dictionary extends Component {
   };
 
   addNewDictionaryItem = evt => {
-    if (
-      this.state.newWord != '' &&
-      this.state.newTranslation != '' &&
-      evt.keyCode == 13 &&
-      evt.shiftKey == false
-    ) {
-      evt.preventDefault();
+    if (this.state.newWord != '' && this.state.newTranslation != '') {
+      evt.preventDefault()
       this.setState({
         dictionaryList: [
           {
@@ -126,7 +145,10 @@ class Dictionary extends Component {
         ],
         newWord: '',
         newTranslation: '',
-      });
+      }, () => {
+        const element = this.inputs[1];
+        element.focus()
+      })
     }
   };
 
@@ -139,10 +161,11 @@ class Dictionary extends Component {
           width: DICTIONARY_WIDTH,
         }}
       >
-        <div className="dictionary-list">
+        <div style={{ padding: 18 }}>
           <NewDictionaryItemForm
             word={this.state.newWord}
             translation={this.state.newTranslation}
+            innerRef={element => (this.inputs[1] = element)}
             wordPlaceHolder="Word"
             translationPlaceHolder="Translation"
             onChangeWord={evt =>
@@ -154,7 +177,7 @@ class Dictionary extends Component {
             onSubmit={evt => this.addNewDictionaryItem(evt)}
           />
           <Button title="Add a new word" onClick={this.addNewDictionaryItem} />
-          <div style={{ marginTop: 20 }}>
+          <div className="dictionary-list">
             {this.state.dictionaryList.map(item => (
               <DictionaryItem
                 key={item.id}

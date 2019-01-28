@@ -1,3 +1,7 @@
+.course {
+  padding: 130px 100px 60px 100px
+}
+
 .course-progress {
   display: flex;
   flex-direction: row;

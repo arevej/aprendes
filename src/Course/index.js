@@ -4,7 +4,7 @@ import { Route, Link } from 'react-router-dom';
 import Exercise from './../Exercise';
 import Header from '../Header';
 import ProgressBar from '../components/ProgressBar';
-import Dictionary from './Dictionary';
+import Dictionary from '../Dictionary/index';
 
 import {
   FormatTaskOpenBrackets,
@@ -15,22 +15,6 @@ import {
 import { topics } from './data';
 
 import './index.css';
-
-function Container({ children }) {
-  return (
-    <div
-      style={{
-        marginTop: '150px',
-        marginLeft: '150px',
-        marginRight: '150px',
-        marginBottom: '30px',
-        flex: '1',
-      }}
-    >
-      {children}
-    </div>
-  );
-}
 
 const types = {
   open_brackets: FormatTaskOpenBrackets,
@@ -61,9 +45,16 @@ class Course extends Component {
     });
   };
 
-  handleOpenAndCloseDictionary = () => {
+  handleOpenAndCloseDictionary = (evt) => {
+    evt.stopPropagation();
     this.setState({ isDictionaryOpen: !this.state.isDictionaryOpen });
   };
+
+  closeDictionary = () => {
+    if (this.state.isDictionaryOpen) {
+      this.setState({ isDictionaryOpen: false })
+    }
+  }
 
   render() {
     const ExerciseComponent = ({ match }) => {
@@ -92,15 +83,16 @@ class Course extends Component {
 
     return (
       <React.Fragment>
-        <Container>
+        <div className="course" onClick={this.closeDictionary}>
           <Header>
             <div
               className="course-dictionary-button"
-              onClick={this.handleOpenAndCloseDictionary}
+              onClick={evt => this.handleOpenAndCloseDictionary(evt)}
             >
               Your dictionary
             </div>
           </Header>
+
 
           <Route
             path={match.url}
@@ -138,9 +130,9 @@ class Course extends Component {
           />
 
           <Route path={`${match.url}/:slug`} render={ExerciseComponent} />
-        </Container>
+        </div>
         <Dictionary isDictionaryOpen={this.state.isDictionaryOpen} />
-      </React.Fragment>
+      </React.Fragment >
     );
   }
 }

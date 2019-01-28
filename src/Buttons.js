@@ -1,5 +1,5 @@
 import React from 'react';
-import * as Icons from 'react-icons/lib/ti';
+import * as Icons from 'react-icons/fa';
 
 import './Buttons.css';
 
@@ -18,7 +18,7 @@ export function ButtonToVoice({ text, size }) {
   textToVoice.rate = 0.1;
   textToVoice.pitch = 0.2;
   return (
-    <Icons.TiVolumeUp
+    <Icons.FaVolumeUp
       size={size}
       className="button-to-voice"
       onClick={() => window.speechSynthesis.speak(textToVoice)}
@@ -34,11 +34,11 @@ export function RoundButton({ record, stop, play, active, onClick }) {
     >
       {(() => {
         if (record) {
-          return <Icons.TiMediaRecord size={30} />;
+          return <Icons.FaMicrophoneAlt size={30} />;
         } else if (stop) {
-          return <Icons.TiMediaStop size={30} />;
+          return <Icons.FaStop size={30} />;
         } else if (play) {
-          return <Icons.TiMediaPlay size={30} />;
+          return <Icons.FaPlay size={30} />;
         }
       })()}
     </div>

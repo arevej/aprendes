@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
 import Course from './Course';
 import Button from './Buttons';
+import RegistrationForm from './Registration';
 
 import logo from './img/logo.png';
 import cover from './img/cover.png';
@@ -36,14 +37,14 @@ function MainPage() {
     <div className="main">
       <Logo />
       <Link
-        to="/course"
+        to="/registration"
         style={{
           display: 'flex',
           justifyContent: 'center',
           marginTop: '-85px',
         }}
       >
-        <Button title="Learn Spanish" onclick={() => {}} round />
+        <Button title="Learn Spanish" onclick={() => { }} round />
       </Link>
       <Container>
         <div className="main-description">
@@ -91,8 +92,10 @@ class App extends Component {
       <Router>
         <React.Fragment>
           <Route path="/" exact component={MainPage} />
-
-          <Route path="/course" component={Course} />
+          <div style={{ flex: 1 }}>
+            <Route path="/course" component={Course} />
+            <Route path="/registration" component={RegistrationForm} />
+          </div>
 
           <Footer />
         </React.Fragment>
